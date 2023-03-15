@@ -1,0 +1,7 @@
+# 忽略指定文件
+HelloWrold.class
+
+# 忽略指定文件夹
+.vs/
+bin/
+obj/
