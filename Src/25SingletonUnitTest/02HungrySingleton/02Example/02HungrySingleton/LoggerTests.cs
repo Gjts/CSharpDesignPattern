@@ -1,19 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using _Singleton._01ImplementationMethod;
+using _Singleton._02Example._02HungrySingleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _Singleton._01ImplementationMethod.Tests
+namespace _Singleton._02Example._02HungrySingleton.Tests
 {
     [TestClass()]
-    public class LazySingletonTests
+    public class LoggerTests
     {
         [TestMethod()]
-        public void SomeMethodTest()
+        public void LogMessageTest()
         {
+            Assert.Fail();
         }
     }
 }

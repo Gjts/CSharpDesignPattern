@@ -1,15 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using _Singleton._02Example;
+using _Singleton._02Example._07RegistrySingleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _Singleton._02Example.Tests
+namespace _Singleton._02Example._07RegistrySingleton.Tests
 {
     [TestClass()]
-    public class ConnectionPoolTests
+    public class LoadBalancerTests
     {
         [TestMethod()]
         public void GetInstanceTest()
@@ -18,19 +18,25 @@ namespace _Singleton._02Example.Tests
         }
 
         [TestMethod()]
-        public void GetClientTest()
+        public void AddServerTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
-        public void AddClientTest()
+        public void RemoveServerTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
-        public void ReleaseClientTest()
+        public void GetRandomServerTest()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void GetCustomServersTest()
         {
             Assert.Fail();
         }

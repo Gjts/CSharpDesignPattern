@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _Singleton._02Example
+namespace _Singleton._02Example._01lazySingleton
 {
     // 数据库连接池
     public class ConnectionPool
