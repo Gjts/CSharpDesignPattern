@@ -8,9 +8,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="01ImplementationMethod\" />
-    <Folder Include="02Example\" />
-  </ItemGroup>
-
 </Project>
