@@ -3,9 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>_06Prototype</RootNamespace>
+    <RootNamespace>_01Adapter</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="01ImplementationMethod\" />
+    <Folder Include="02Example\" />
+  </ItemGroup>
 
 </Project>
