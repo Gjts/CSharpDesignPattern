@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._01ImplementationMethod
+﻿namespace _Singleton._01ImplementationMethod
 {
     // 5.双检查单例模式
     // 适用场景：当需要延迟加载单例对象，并且要保证线程安全性时，可以选择双重检查锁定单例。

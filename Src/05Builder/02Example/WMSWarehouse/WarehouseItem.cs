@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _05Builder._02Example.WMSWarehouse
+﻿namespace _05Builder._02Example.WMSWarehouse
 {
     public class WarehouseItem
     {

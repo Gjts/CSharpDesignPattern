@@ -1,12 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using _Singleton._02Example._07RegistrySingleton;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._02Example._07RegistrySingleton.Tests
+﻿namespace _Singleton._02Example._07RegistrySingleton.Tests
 {
     [TestClass()]
     public class LoadBalancerTests

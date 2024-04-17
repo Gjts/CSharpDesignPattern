@@ -1,5 +1,4 @@
 ﻿using _06Prototype._01ImplementationMethod;
-using _06Prototype._02Example;
 using _06Prototype._02Example.Inventory;
 using _06Prototype._02Example.VirtualMachine;
 
@@ -7,7 +6,7 @@ namespace _06Prototype
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // 1.创建一个接口或抽象类:定义一个用于克隆对象的方法，通常命名为 Clone 或 DeepCopy
 

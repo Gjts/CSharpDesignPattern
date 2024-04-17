@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _AbstractFactory._02Example.Storage
+﻿namespace _AbstractFactory._02Example.Storage
 {
     // 入库工厂接口
     public interface IInboundFactory

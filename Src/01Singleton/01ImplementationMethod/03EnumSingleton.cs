@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._01ImplementationMethod
+﻿namespace _Singleton._01ImplementationMethod
 {
     // 3.枚举单例
     // 适用场景：当需要简单、高效且线程安全的单例模式时，可以选择枚举单例。

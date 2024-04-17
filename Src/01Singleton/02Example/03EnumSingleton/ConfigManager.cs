@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._02Example._03EnumSingleton
+﻿namespace _Singleton._02Example._03EnumSingleton
 {
     public enum ConfigManager
     {

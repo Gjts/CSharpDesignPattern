@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._02Example._07RegistrySingleton
+﻿namespace _Singleton._02Example._07RegistrySingleton
 {
     // 服务器名称
     public class CustomServer

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._01ImplementationMethod
+﻿namespace _Singleton._01ImplementationMethod
 {
     // 4.静态内部类单例模式
     // 适用场景：静态内部类单例适用于需要延迟加载、线程安全的场景，且不需要额外的线程同步措施。

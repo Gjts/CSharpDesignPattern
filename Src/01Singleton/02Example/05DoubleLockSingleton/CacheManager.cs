@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._02Example._05DoubleLockSingleton
+﻿namespace _Singleton._02Example._05DoubleLockSingleton
 {
     // 双验证缓存管理器
     public class CacheManager<T>

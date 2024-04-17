@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _AbstractFactory._01ImplementationMethod
+﻿namespace _AbstractFactory._01ImplementationMethod
 {
     // 抽象产品接口
     public interface IProduct

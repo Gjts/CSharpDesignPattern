@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _SimpleFactory._02Example._02Warehousing
+﻿namespace _SimpleFactory._02Example._02Warehousing
 {
     // 抽象入库类
     public abstract class Warehousing

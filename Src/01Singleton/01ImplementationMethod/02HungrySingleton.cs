@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._01ImplementationMethod
+﻿namespace _Singleton._01ImplementationMethod
 {
     // 2.饿加载单例模式
     // 适用场景：当程序中的单例对象会被频繁使用，或者需要在程序启动时就立即创建对象时，可以选择饿汉式单例。

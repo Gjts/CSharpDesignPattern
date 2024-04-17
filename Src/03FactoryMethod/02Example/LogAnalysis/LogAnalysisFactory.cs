@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _FactoryMethod._02Example.LogAnalysis
+﻿namespace _FactoryMethod._02Example.LogAnalysis
 {
     // 抽象工厂类
     public abstract class LogAnalysisFactory

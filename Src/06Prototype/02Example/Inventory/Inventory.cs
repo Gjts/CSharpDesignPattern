@@ -1,9 +1,4 @@
 ﻿using _06Prototype._01ImplementationMethod;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _06Prototype._02Example.Inventory
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _SimpleFactory._02Example._01Authentication
+﻿namespace _SimpleFactory._02Example._01Authentication
 {
     // 抽象认证类
     public abstract class Authentication

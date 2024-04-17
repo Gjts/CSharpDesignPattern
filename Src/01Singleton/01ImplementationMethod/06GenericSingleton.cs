@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _Singleton._01ImplementationMethod
+﻿namespace _Singleton._01ImplementationMethod
 {
     // 6.泛型单例模式
     // 适用场景：泛型单例模式适用于需要创建多种类型的单例对象，并且希望在第一次使用时才实例化该对象的场景。

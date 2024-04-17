@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _05Builder._01ImplementationMethod
+﻿namespace _05Builder._01ImplementationMethod
 {
     // 表示被构造的复杂对象
     public class Product

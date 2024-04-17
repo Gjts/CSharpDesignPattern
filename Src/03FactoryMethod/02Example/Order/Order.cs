@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _FactoryMethod._02Example.Order
+﻿namespace _FactoryMethod._02Example.Order
 {
     // 抽象订单类
     public abstract class Order

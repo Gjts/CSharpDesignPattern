@@ -1,5 +1,4 @@
-﻿using _SimpleFactory._01ImplementationMethod;
-using _SimpleFactory._02Example._01Authentication;
+﻿using _SimpleFactory._02Example._01Authentication;
 using _SimpleFactory._02Example._02Warehousing;
 
 namespace _02SimpleFactory
@@ -8,7 +7,7 @@ namespace _02SimpleFactory
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("-------------------------------- 登录验证 ----------------------------------"); 
+            Console.WriteLine("-------------------------------- 登录验证 ----------------------------------");
             AuthenticationFactory factory = new AuthenticationFactory();
             Authentication usernamePasswordAuth = factory.CreateAuthentication<UsernamePasswordAuthentication>();
             usernamePasswordAuth.Authenticate();

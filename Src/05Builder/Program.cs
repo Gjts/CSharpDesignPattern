@@ -1,5 +1,4 @@
-﻿using _05Builder._01ImplementationMethod;
-using _05Builder._02Example.AppConfig;
+﻿using _05Builder._02Example.AppConfig;
 using _05Builder._02Example.WMSWarehouse;
 
 namespace _05Builder

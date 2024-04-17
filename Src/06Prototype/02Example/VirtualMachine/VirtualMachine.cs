@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _06Prototype._02Example.VirtualMachine
+﻿namespace _06Prototype._02Example.VirtualMachine
 {
     // 具体的虚拟机类
     public class VirtualMachine : IPrototype<VirtualMachine>

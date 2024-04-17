@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
 namespace _06Prototype._01ImplementationMethod
 {
     // 原型类
     public class Prototype<T> : IPrototype<Prototype<T>>, IEnumerable<KeyValuePair<string, T>> where T : new()
     {
-        private Dictionary<string, T> properties = new Dictionary<string, T>();
+        private readonly Dictionary<string, T> properties = new();
 
         public T this[string key]
         {
