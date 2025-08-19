@@ -19,23 +19,32 @@ namespace _08Bridge
             abstraction = new RefinedAbstraction(implementorB);
             abstraction.Operation();
 
-            Console.WriteLine("\n2. 实际示例 - 遥控器和设备：");
+            Console.WriteLine("\n2. 支付系统示例：");
+            Console.WriteLine("演示不同支付渠道与支付方式的组合");
+            Console.WriteLine(new string('-', 60));
             
-            // 使用普通遥控器控制电视
-            IDevice tv = new TV();
-            RemoteControl remote = new AdvancedRemoteControl(tv);
-            remote.TogglePower();
-            remote.VolumeUp();
-            remote.ChannelUp();
-
-            Console.WriteLine();
-
-            // 使用高级遥控器控制收音机
-            IDevice radio = new Radio();
-            AdvancedRemoteControl advancedRemote = new AdvancedRemoteControl(radio);
-            advancedRemote.TogglePower();
-            advancedRemote.VolumeUp();
-            advancedRemote.Mute();
+            // 电商平台 + 支付宝
+            IPaymentMethod alipay = new AlipayMethod();
+            PaymentChannel ecommerce = new ECommercePaymentChannel(alipay);
+            ecommerce.MakePayment(1288.00m, "user@example.com");
+            
+            // 移动端 + 微信支付
+            IPaymentMethod wechat = new WeChatPayMethod();
+            PaymentChannel mobile = new MobilePaymentChannel(wechat);
+            mobile.MakePayment(68.50m, "wx_user_12345");
+            
+            // POS机 + 银行卡
+            IPaymentMethod bankCard = new BankCardMethod();
+            PaymentChannel pos = new POSPaymentChannel(bankCard, "POS001", "MERCHANT888");
+            pos.MakePayment(520.00m, "6222021234567890123");
+            
+            // 电商平台 + PayPal（国际支付）
+            IPaymentMethod paypal = new PayPalMethod();
+            PaymentChannel international = new ECommercePaymentChannel(paypal);
+            international.MakePayment(99.99m, "international@buyer.com");
+            
+            Console.WriteLine("\n" + new string('=', 60));
+            Console.WriteLine("桥接模式优势：支付渠道和支付方式可以独立变化和扩展");
         }
     }
 }
