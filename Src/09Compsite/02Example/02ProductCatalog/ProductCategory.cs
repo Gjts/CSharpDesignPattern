@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace _09Compsite._02Example
+namespace _09Compsite._02Example._02ProductCatalog
 {
     // 商品分类组件抽象类
     public abstract class CategoryComponent

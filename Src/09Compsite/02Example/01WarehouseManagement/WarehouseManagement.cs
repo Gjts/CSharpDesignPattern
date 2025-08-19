@@ -1,4 +1,4 @@
-namespace _09Compsite._02Example
+namespace _09Compsite._02Example._01WarehouseManagement
 {
     // 仓库存储单元抽象类
     public abstract class StorageUnit

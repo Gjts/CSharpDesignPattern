@@ -1,5 +1,9 @@
 using _09Compsite._01ImplementationMethod;
-using _09Compsite._02Example;
+using _09Compsite._02Example._01WarehouseManagement;
+using _09Compsite._02Example._02ProductCatalog;
+using _09Compsite._02Example._03FileSystem;
+using Directory = _09Compsite._02Example._03FileSystem.Directory;
+using File = _09Compsite._02Example._03FileSystem.File;
 
 namespace _09Compsite
 {
@@ -136,6 +140,59 @@ namespace _09Compsite
             {
                 Console.WriteLine($"  ⚠ {product.name} - 库存: {product.stock}");
             }
+
+            // 文件系统示例
+            Console.WriteLine("\n4. 文件系统示例：");
+            Console.WriteLine(new string('-', 60));
+            
+            // 创建根目录
+            Directory root = new Directory("project", "admin");
+            
+            // 创建src目录
+            Directory src = new Directory("src", "developer");
+            src.Add(new File("main.cs", 2048, "developer"));
+            src.Add(new File("utils.cs", 1024, "developer"));
+            src.Add(new File("config.json", 512, "developer"));
+            
+            // 创建子目录
+            Directory models = new Directory("models", "developer");
+            models.Add(new File("User.cs", 1536, "developer"));
+            models.Add(new File("Product.cs", 1280, "developer"));
+            models.Add(new File("Order.cs", 1920, "developer"));
+            src.Add(models);
+            
+            // 创建docs目录
+            Directory docs = new Directory("docs", "writer");
+            docs.Add(new File("README.md", 4096, "writer"));
+            docs.Add(new File("API.pdf", 10240, "writer"));
+            docs.Add(new File("设计文档.docx", 8192, "writer"));
+            
+            // 创建resources目录
+            Directory resources = new Directory("resources", "designer");
+            resources.Add(new File("logo.png", 5120, "designer"));
+            resources.Add(new File("banner.jpg", 15360, "designer"));
+            resources.Add(new File("style.css", 2048, "designer"));
+            
+            // 添加到根目录
+            root.Add(src);
+            root.Add(docs);
+            root.Add(resources);
+            root.Add(new File(".gitignore", 256, "admin"));
+            root.Add(new File("LICENSE", 1024, "admin"));
+            
+            // 显示目录结构
+            root.Display(0);
+            
+            // 搜索文件
+            Console.WriteLine("\n搜索包含 'cs' 的文件:");
+            var csFiles = root.SearchFiles("cs");
+            foreach (var file in csFiles)
+            {
+                Console.WriteLine($"  找到: {file.name}");
+            }
+            
+            // 生成目录树报告
+            root.GenerateTreeReport();
         }
     }
 }
