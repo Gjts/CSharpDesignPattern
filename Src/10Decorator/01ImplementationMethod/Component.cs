@@ -18,7 +18,7 @@ namespace _10Decorator._01ImplementationMethod
     // 装饰器抽象类
     public abstract class Decorator : Component
     {
-        protected Component component;
+        protected Component? component;
 
         public void SetComponent(Component component)
         {

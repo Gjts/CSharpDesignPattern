@@ -20,17 +20,19 @@ namespace _11Facade
 
             var order = new _11Facade._02Example._01ECommerceOrder.OrderInfo
             {
+                OrderId = $"ORD{DateTime.Now:yyyyMMddHHmmss}",
                 CustomerId = "CUST10001",
                 CustomerEmail = "user@example.com",
                 CustomerPhone = "+86-13800000000",
                 ShippingAddress = "深圳市南山区科技园",
                 CouponCode = "SAVE20",
-                PaymentMethod = "Alipay"
-            };
-            order.Items = new System.Collections.Generic.List<_11Facade._02Example._01ECommerceOrder.OrderItem>
-            {
-                new _11Facade._02Example._01ECommerceOrder.OrderItem { SkuId = "SKU001", ProductName = "旗舰手机", Quantity = 1, UnitPrice = 5999m },
-                new _11Facade._02Example._01ECommerceOrder.OrderItem { SkuId = "SKU003", ProductName = "蓝牙耳机", Quantity = 2, UnitPrice = 199m }
+                PaymentMethod = "Alipay",
+                Status = "待处理",
+                Items = new System.Collections.Generic.List<_11Facade._02Example._01ECommerceOrder.OrderItem>
+                {
+                    new _11Facade._02Example._01ECommerceOrder.OrderItem { SkuId = "SKU001", ProductName = "旗舰手机", Quantity = 1, UnitPrice = 5999m },
+                    new _11Facade._02Example._01ECommerceOrder.OrderItem { SkuId = "SKU003", ProductName = "蓝牙耳机", Quantity = 2, UnitPrice = 199m }
+                }
             };
 
             bool orderResult = orderFacade.PlaceOrder(order);

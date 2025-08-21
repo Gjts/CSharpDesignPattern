@@ -35,13 +35,13 @@ namespace _12Flyweight._02Example._01ProductCache
         }
     }
 
-    // 商品实例（包含外部状态）
+    // 商品实例（享元对象）
     public class ProductInstance
     {
         private ProductBasicInfo basicInfo;  // 共享的内部状态
         
         // 外部状态 - 每个实例独有
-        public string WarehouseId { get; set; }
+        public required string WarehouseId { get; set; }
         public int Stock { get; set; }
         public decimal CurrentPrice { get; set; }
         public decimal Discount { get; set; }
@@ -73,7 +73,7 @@ namespace _12Flyweight._02Example._01ProductCache
     // 商品缓存工厂（享元工厂）
     public class ProductCacheFactory
     {
-        private static ProductCacheFactory instance;
+        private static ProductCacheFactory? instance;
         private Dictionary<string, ProductBasicInfo> productCache;
         private int cacheHits = 0;
         private int cacheMisses = 0;
@@ -141,7 +141,7 @@ namespace _12Flyweight._02Example._01ProductCache
             productCache[product.SkuId] = product;
         }
 
-        public ProductBasicInfo GetProduct(string skuId)
+        public ProductBasicInfo? GetProduct(string skuId)
         {
             if (productCache.ContainsKey(skuId))
             {
@@ -155,7 +155,7 @@ namespace _12Flyweight._02Example._01ProductCache
                 Console.WriteLine($"[缓存未命中] SKU: {skuId}，从数据库加载...");
                 
                 // 模拟从数据库加载
-                ProductBasicInfo newProduct = LoadFromDatabase(skuId);
+                ProductBasicInfo? newProduct = LoadFromDatabase(skuId);
                 if (newProduct != null)
                 {
                     AddToCache(newProduct);
@@ -165,7 +165,7 @@ namespace _12Flyweight._02Example._01ProductCache
             }
         }
 
-        private ProductBasicInfo LoadFromDatabase(string skuId)
+        private ProductBasicInfo? LoadFromDatabase(string skuId)
         {
             // 模拟数据库查询延迟
             System.Threading.Thread.Sleep(100);
@@ -182,9 +182,9 @@ namespace _12Flyweight._02Example._01ProductCache
             );
         }
 
-        public ProductInstance CreateProductInstance(string skuId, string warehouseId, int stock)
+        public ProductInstance? CreateProductInstance(string skuId, string warehouseId, int stock)
         {
-            ProductBasicInfo basicInfo = GetProduct(skuId);
+            ProductBasicInfo? basicInfo = GetProduct(skuId);
             if (basicInfo == null)
             {
                 return null;

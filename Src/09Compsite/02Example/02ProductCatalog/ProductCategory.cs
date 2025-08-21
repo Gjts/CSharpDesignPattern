@@ -16,6 +16,10 @@ namespace _09Compsite._02Example._02ProductCatalog
             this.description = description;
         }
 
+        // 添加公共属性来访问 name 和 description
+        public string Name => name;
+        public string Description => description;
+
         public abstract void Add(CategoryComponent component);
         public abstract void Remove(CategoryComponent component);
         public abstract void Display(int depth);
@@ -178,7 +182,7 @@ namespace _09Compsite._02Example._02ProductCatalog
                 Console.WriteLine("\n子分类销售情况:");
                 foreach (var subCategory in subCategories)
                 {
-                    Console.WriteLine($"  {subCategory.name}:");
+                    Console.WriteLine($"  {subCategory.Name}:");
                     Console.WriteLine($"    商品数量: {subCategory.GetProductCount()}");
                     Console.WriteLine($"    销售总额: ¥{subCategory.GetTotalSales():F2}");
                 }
@@ -192,7 +196,7 @@ namespace _09Compsite._02Example._02ProductCatalog
                 int rank = 1;
                 foreach (var product in topProducts)
                 {
-                    Console.WriteLine($"  {rank}. {product.name} - 销量: {product.salesCount} - 销售额: ¥{product.GetTotalSales():F2}");
+                    Console.WriteLine($"  {rank}. {product.Name} - 销量: {product.salesCount} - 销售额: ¥{product.GetTotalSales():F2}");
                     rank++;
                 }
             }
@@ -244,8 +248,8 @@ namespace _09Compsite._02Example._02ProductCatalog
         {
             var allProducts = rootCategory.GetAllProducts();
             return allProducts.Where(p => 
-                p.name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
-                p.description.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                p.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                p.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
                 p.brand.Contains(keyword, StringComparison.OrdinalIgnoreCase)
             ).ToList();
         }

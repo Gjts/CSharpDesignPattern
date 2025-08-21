@@ -1,177 +1,229 @@
-# CSharpDesignPattern
-## 设计模式是什么？
+# 🎯 C# 设计模式学习项目
 
-**设计模式是软件设计中常见问题解决方案。它们是根据需求制定不同的优化方案来优化项目的整体结构，可用于解决代码中反复出现的设计问题。**
+> **设计模式是软件设计中常见问题解决方案。它们是根据需求制定不同的优化方案来优化项目的整体结构，可用于解决代码中反复出现的设计问题。**
 
-## 设计模式分为哪几种？
+## 📊 项目进度概览
 
-    1. 创建型设计模式：使用不同的创建方式来创建对象，关注点在将对象的创建与使用分离。
+### 🎯 总体进度
+- **📈 完成度**: 54% (13/24 设计模式)
+- **🏗️ 项目状态**: 🚧 进行中
+- **🔧 技术栈**: .NET 8.0 + C# 12
+- **📚 学习状态**: 📖 学习中
 
-    2. 结构型设计模式：如何将对象和类组装成更大的结构，并同时保持结构的灵活和高效。
+### 🏆 里程碑
+- ✅ **2024-01**: 项目启动，完成基础架构
+- ✅ **2024-01**: 完成所有创建型设计模式 (6/6)
+- ✅ **2024-01**: 完成所有结构型设计模式 (7/7)
+- 🚧 **2024-01**: 行为型设计模式项目结构创建 (11/11)
+- 🎯 **2024-02**: 实现剩余行为型设计模式 (0/11)
+- 🎯 **2024-02**: 单元测试覆盖 (进行中)
 
-    3. 行为型设计模式：多个类或对象之间的相互协作。
+---
 
-### 设计模式六大原则:
+## 🎨 设计模式分类
 
-    1. 单一职责原则：一个类应该只有一个发生变化的原因。
+### 📋 设计模式六大原则:
 
-    2. 开闭原则：对扩展开放，对修改关闭（使用接口或者抽象类，让代码支持可配置）。
+1. **🔒 单一职责原则**: 一个类应该只有一个发生变化的原因。
+2. **🔓 开闭原则**: 对扩展开放，对修改关闭（使用接口或者抽象类，让代码支持可配置）。
+3. **🔄 里氏替换原则**: 有父类的地方就可以用子类来代替。
+4. **🤝 迪米特法则**: 如果两个程序无须直接通信，那么就不应当发生直接的相互调用，通过第三方服务来打通之间的数据，降低类之间的耦合度。
+5. **🔌 接口隔离原则**: 一个类对另一个类的依赖应该建立在最小的接口上。
+6. **⬇️ 依赖倒置原则**: 上层模块不应该依赖底层模块，它们都应该依赖于抽象（面向接口，面向服务）
 
-    3. 里氏替换原则：有父类的地方就可以用子类来代替。
+---
 
-    4. 迪米特法则：如果两个程序无须直接通信，那么就不应当发生直接的相互调用，通过第三方服务来打通之间的数据，降低类之间的耦合度。
+## 🚀 创建型设计模式 (6/6) ✅
 
-    5. 接口隔离原则：一个类对另一个类的依赖应该建立在最小的接口上。
+> **关注点**: 使用不同的创建方式来创建对象，关注点在将对象的创建与使用分离。
 
-    6. 依赖倒置原则：上层模块不应该依赖底层模块，它们都应该依赖于抽象（面向接口，面向服务）
+1. **🔄 [Singleton（单例模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/01Singleton)** ✅
+   - **🎯 使用场景**: 数据库连接池、日志记录器、配置管理器、缓存管理器、线程池管理器
+   - **💡 总结**: 确保一个类只有一个实例并提供全局访问。
+   - **📝 状态**: 已完成，包含7种实现方式 + 单元测试
 
-## 创建型设计模式
-1. [Singleton（单例模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/01Singleton)
+2. **🏭 [Simple Factory（简单工厂模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/02SimpleFactory)** ✅
+   - **🎯 使用场景**: 支付方式选择（支付宝、微信、银行卡）、数据库连接类型选择、文件格式转换器选择
+   - **💡 总结**: 通过一个接口创建对象，隐藏创建逻辑。
+   - **📝 状态**: 已完成，包含认证和仓储示例
 
-    使用场景： 当需要确保一个类只有一个实例，并提供一个全局访问点时。
+3. **🏗️ [Factory Method（工厂方法模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/03FactoryMethod)** ✅
+   - **🎯 使用场景**: 不同数据库的日志记录器、不同格式的订单处理器、不同平台的UI组件创建
+   - **💡 总结**: 子类决定实例化哪一个类。
+   - **📝 状态**: 已完成，包含日志分析和订单处理示例
+
+4. **🏭 [Abstract Factory（抽象工厂模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/04AbstractFactory)** ✅
+   - **🎯 使用场景**: 跨平台UI组件（Windows/Mac/Linux）、不同数据库的仓储服务、不同操作系统的文件系统
+   - **💡 总结**: 创建相关的对象家族而不需指定具体类。
+   - **📝 状态**: 已完成，包含存储服务和WMS示例
+
+5. **🔨 [Builder（建造者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/05Builder)** ✅
+   - **🎯 使用场景**: 构建复杂SQL查询、创建邮件消息、构建HTTP请求、创建配置文件、构建游戏角色
+   - **💡 总结**: 分步骤构建一个复杂的对象。
+   - **📝 状态**: 已完成，包含应用配置和仓库物品构建示例
+
+6. **🔄 [Prototype（原型模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/06Prototype)** ✅
+   - **🎯 使用场景**: 游戏对象克隆、文档模板复制、虚拟机快照、数据库记录复制、图形对象复制
+   - **💡 总结**: 通过复制现有的实例来创建新的实例。
+   - **📝 状态**: 已完成，包含库存管理和虚拟机管理示例
+
+---
+
+## 🏗️ 结构型设计模式 (7/7) ✅
+
+> **关注点**: 如何将对象和类组装成更大的结构，并同时保持结构的灵活和高效。
+
+7. **🔌 [Adapter（适配器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/07Adapter)** ✅
+   - **🎯 使用场景**: 第三方支付接口适配、旧系统API适配、不同数据格式转换、硬件设备驱动适配
+   - **💡 总结**: 允许不兼容的对象能够合作。
+   - **📝 状态**: 已完成，包含内网注册、外网注册和支付系统示例
+
+8. **🌉 [Bridge（桥接模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/08Bridge)** ✅
+   - **🎯 使用场景**: 不同操作系统的图形界面、不同数据库的仓储实现、不同消息队列的消息处理
+   - **💡 总结**: 分离抽象与实现，使它们可以独立变化。
+   - **📝 状态**: 已完成，包含支付系统和遥控器示例
+
+9. **🌳 [Composite（组合模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/09Compsite)** ✅
+   - **🎯 使用场景**: 文件系统目录结构、组织架构管理、菜单系统、产品分类树、权限管理
+   - **💡 总结**: 以树形结构组合对象，表示部分整体层次。
+   - **📝 状态**: 已完成，包含仓库管理、商品目录和文件系统示例
+
+10. **🎨 [Decorator（装饰器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/10Decorator)** ✅
+    - **🎯 使用场景**: 咖啡配料添加、订单处理流程扩展、文本格式化、日志记录增强、权限验证包装
+    - **💡 总结**: 动态地给对象添加额外的职责。
+    - **📝 状态**: 已完成，包含咖啡、订单处理和文本处理示例
+
+11. **🏛️ [Facade（外观模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/11Facade)** ✅
+    - **🎯 使用场景**: 电商下单流程、视频转换服务、银行开户流程、酒店预订系统、在线教育平台
+    - **💡 总结**: 提供一个统一的接口以访问子系统中的一群接口。
+    - **📝 状态**: 已完成，包含电商订单和视频转换示例
+
+12. **🪶 [Flyweight（享元模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/12Flyweight)** ✅
+    - **🎯 使用场景**: 游戏中的子弹对象、数据库连接池、字符字体缓存、图形对象共享、配置信息缓存
+    - **💡 总结**: 通过共享来支持大量细粒度的对象。
+    - **📝 状态**: 已完成，包含商品缓存和连接池示例
+
+13. **🕵️ [Proxy（代理模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/13Proxy)** ✅
+    - **🎯 使用场景**: 远程服务调用、图片懒加载、权限控制、缓存代理、日志记录代理
+    - **💡 总结**: 提供一个对象的代理以控制对它的访问。
+    - **📝 状态**: 已完成，包含远程服务、图片加载和安全代理示例
+
+---
+
+## 🎭 行为型设计模式 (0/11) 🚧
+
+> **关注点**: 多个类或对象之间的相互协作。
+
+14. **🔍 [Interpreter（解释器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/14Interpreter)** 🚧
+    - **🎯 使用场景**: SQL查询解析器、数学表达式计算器、配置文件解析器、正则表达式引擎、脚本语言解释器
+    - **💡 总结**: 为语言创建解释器，通常由抽象语法树表示。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
+
+15. **📋 [Template Method（模板方法模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/15Template)** 🚧
+    - **🎯 使用场景**: 数据导入导出流程、报表生成流程、订单处理流程、用户注册流程、文件上传下载流程
+    - **💡 总结**: 在一个方法中定义算法的骨架，延迟步骤到子类。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-    总结： 确保一个类只有一个实例并提供全局访问。
-		
+16. **⛓️ [Chain of Responsibility（责任链模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/16Respon)** 🚧
+    - **🎯 使用场景**: 请求审批流程、异常处理链、日志过滤器链、权限验证链、数据验证链
+    - **💡 总结**: 通过链上的对象传递请求，直到被处理。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-2. [Simple Factory（简单工厂模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/02SimpleFactory)
+17. **📜 [Command（命令模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/17Command)** 🚧
+    - **🎯 使用场景**: 撤销重做功能、任务队列、宏命令、远程调用、日志记录
+    - **💡 总结**: 将请求封装成对象，以参数化客户端。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-    使用场景： 在创建对象时，不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。
+18. **🔄 [Iterator（迭代器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/18Iterator)** 🚧
+    - **🎯 使用场景**: 集合遍历、数据库结果集遍历、文件目录遍历、树形结构遍历、分页数据遍历
+    - **💡 总结**: 顺序访问聚合对象中的元素，不暴露内部表示。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-    总结： 通过一个接口创建对象，隐藏创建逻辑。
-	
+19. **🤝 [Mediator（中介者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/19Mediator)** 🚧
+    - **🎯 使用场景**: 聊天室系统、工作流引擎、事件总线、消息中间件、UI组件协调
+    - **💡 总结**: 通过中介者封装一组对象的交互。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-3. [Factory Method（工厂方法模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/03FactoryMethod)
+20. **💾 [Memento（备忘录模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/20Memento)** 🚧
+    - **🎯 使用场景**: 文本编辑器撤销、游戏存档、数据库事务回滚、配置备份恢复、操作历史记录
+    - **💡 总结**: 保存对象的状态，以便恢复。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-    使用场景： 当一个类需要其子类来指定创建的对象时。
+21. **👀 [Observer（观察者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/21Observer)** 🚧
+    - **🎯 使用场景**: 股票价格变化通知、用户登录状态通知、订单状态更新通知、系统事件通知、数据变更通知
+    - **💡 总结**: 对象间的一对多依赖关系，当一个对象改变时，其依赖者得到通知并自动更新。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-    总结： 子类决定实例化哪一个类。
+22. **🔄 [State（状态模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/22State)** 🚧
+    - **🎯 使用场景**: 订单状态管理、游戏角色状态、工作流状态、设备运行状态、用户会话状态
+    - **💡 总结**: 对象的行为依赖于其状态，状态改变时行为也随之改变。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-4. [Abstract Factory（抽象工厂模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/04AbstractFactory)
+23. **⚔️ [Strategy（策略模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/23Strategy)** 🚧
+    - **🎯 使用场景**: 支付策略选择、排序算法选择、压缩算法选择、缓存策略选择、日志记录策略
+    - **💡 总结**: 定义一系列算法，使它们可以互换。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-    使用场景： 当需要创建一系列相关或相互依赖的对象时，且不需要指定它们具体的类。
+24. **👨‍💼 [Visitor（访问者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/24Visitor)** 🚧
+    - **🎯 使用场景**: 文档导出功能、代码分析工具、图形对象操作、XML节点处理、语法树遍历
+    - **💡 总结**: 在不改变元素类的前提下，增加作用于元素类上的新操作。
+    - **📝 状态**: 🚧 项目结构已创建，代码待实现
 
-    总结： 创建相关的对象家族而不需指定具体类。
+---
 
-5. [Builder（建造者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/05Builder)
+## 📈 项目统计
 
-    使用场景： 当创建复杂对象的算法应该独立于该对象的组成部分以及它们的装配方式时。
+### 🎯 完成情况
+- **📚 创建型模式**: 6/6 (100%) ✅
+- **🏗️ 结构型模式**: 7/7 (100%) ✅  
+- **🎭 行为型模式**: 0/11 (0%) 🚧
+- **📊 总计**: 13/24 (54%) 🚧
 
-    总结： 分步骤构建一个复杂的对象。
+### 🔧 技术特性
+- **✅ .NET 8.0**: 最新LTS版本
+- **✅ C# 12**: 最新语言特性
+- **✅ 可空引用类型**: 类型安全
+- **✅ 隐式using**: 代码简洁
+- **✅ 单元测试**: 质量保证（部分项目）
+- **✅ 代码规范**: 遵循最佳实践
 
-6. [Prototype（原型模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/06Prototype)
+### 🚀 下一步计划
+- **🎯 行为型模式实现**: 完成剩余的11个设计模式
+- **🧪 单元测试覆盖**: 提升到90%+
+- **📖 文档完善**: 添加详细使用说明
+- **🎯 性能优化**: 基准测试和优化
+- **🌐 示例扩展**: 更多实际应用场景
 
-    使用场景： 当需要复制一个对象，同时又希望不增加与对象相关的代码时。
-    
-    总结： 通过复制现有的实例来创建新的实例。
- 
-## 结构型设计模式
-7. [Adapter（适配器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/07Adapter)
+---
 
-    使用场景： 当希望将一个类的接口转换成客户端期望的另一个接口时，使得原本接口不兼容的类可以一起工作。
-	
-    总结： 允许不兼容的对象能够合作。
+## 🎉 当前成就
 
-8. [Bridge（桥接模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/08Bridge)
+恭喜你已经完成了前13个设计模式！这是一个很好的开始！🎊
 
-    使用场景： 当希望将抽象部分与它的实现部分分离，使它们都可以独立地变化时。
-	
-    总结： 分离抽象与实现，使它们可以独立变化。
+### 🏆 **已完成的设计模式**:
+- ✅ **创建型模式**: 6/6 (100%)
+- ✅ **结构型模式**: 7/7 (100%)
+- 🚧 **行为型模式**: 0/11 (0%)
 
-9. [Composite（组合模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/09Compsite)
+### 🎯 **下一步目标**:
+继续学习剩余的行为型设计模式，它们将帮助你更好地理解对象间的交互和协作！
 
-    使用场景： 当需要将对象组合成树形结构以表示部分-整体的层次结构时，使得用户对单个对象和组合对象的使用具有一致性。
-	
-    总结： 以树形结构组合对象，表示部分整体层次。
+> **💡 记住**: 设计模式不是银弹，而是工具箱。选择合适的设计模式来解决具体问题，而不是为了使用模式而使用模式。
 
-10. [Decorator（装饰器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/10Decorator)
+---
 
-    使用场景： 当希望动态地给一个对象添加一些额外的职责时，而不是通过继承一个子类。
-	
-    总结： 动态地给对象添加额外的职责。
+## 📞 联系方式
 
-11. [Facade（外观模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/11Facade)
+- **👨‍💻 作者**: Gjts
+- **📧 邮箱**: [1301385382gjts@gmail.com]
+- **🌐 GitHub**: [https://github.com/Gjts](https://github.com/Gjts)
+- **⭐ 如果这个项目对你有帮助，请给个Star！**
 
-    使用场景： 当需要为一个复杂的子系统提供一个简单的接口时。
-	
-    总结： 提供一个统一的接口以访问子系统中的一群接口。
+---
 
-12. [Flyweight（享元模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/12Flyweight)
+<div align="center">
 
-    使用场景： 当需要大量的对象而且对象之间有大量的重复状态时，可以通过共享来减少资源消耗。
-	
-    总结： 通过共享来支持大量细粒度的对象。
+**🎯 让我们一起在软件设计的道路上继续前进！** 🚀
 
-13. [Proxy（代理模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/13Proxy)
-
-    使用场景： 当需要为另一个对象提供一个代理或占位符以控制对这个对象的访问时。
-	
-    总结： 提供一个对象的代理以控制对它的访问。
-
-## 行为型设计模式
-
-14. [Interpreter（解释器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/14Interpreter)
-
-    使用场景： 当有一个语言需要解释执行，并且可以将该语言中的句子表示为一个抽象语法树时。
-	
-    总结： 为语言创建解释器，通常由抽象语法树表示。
-
-15. [Template Method（模板方法模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/15Template)
-
-    使用场景： 当在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中实现时。
-	
-    总结： 在一个方法中定义算法的骨架，延迟步骤到子类。
-
-16. [Chain of Responsibility（责任链模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/16Respon)
-
-    使用场景： 当需要多个对象中的一个来处理请求时，将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
-	
-    总结： 通过链上的对象传递请求，直到被处理。
-
-17. [Command（命令模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/17Command)
-
-    使用场景： 当需要将请求封装为一个对象，以便使用不同的请求、队列或日志来参数化其他对象时，同时支持撤销操作。
-	
-    总结： 将请求封装成对象，以参数化客户端。
-
-18. [Iterator（迭代器模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/18Iterator)
-
-    使用场景： 当需要提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露其内部的表示时。
-	
-    总结： 顺序访问聚合对象中的元素，不暴露内部表示。
-
-19. [Mediator（中介者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/19Mediator)
-
-    使用场景： 当一组对象以定义良好但复杂的方式进行通信时，通过一个中介对象来封装这些交互，简化了对象之间的通信。
-	
-    总结： 通过中介者封装一组对象的交互。
-
-20. [Memento（备忘录模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/20Memento)
-
-    使用场景： 当需要保存一个对象的状态以便在将来某个时刻可以恢复到这个状态时。
-	
-    总结： 保存对象的状态，以便恢复。
-
-21. [Observer（观察者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/21Observer)
-
-    使用场景： 当一个对象的改变需要同时改变其他对象，而不知道具体有多少对象有待改变时。
-	
-    总结： 对象间的一对多依赖关系，当一个对象改变时，其依赖者得到通知并自动更新。
-
-22. [State（状态模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/22State)
-
-    使用场景： 当一个对象的行为取决于它的状态，并且它必须在运行时根据状态改变它的行为时。
-	
-    总结： 对象的行为依赖于其状态，状态改变时行为也随之改变。
-
-23. [Strategy（策略模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/23Strategy)
-
-    使用场景： 当一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现时，将这些行为封装在单独的策略类中，可以避免条件语句。
-	
-    总结： 定义一系列算法，使它们可以互换。
-
-24. [Visitor（访问者模式）](https://github.com/Gjts/CSharpDesignPattern/tree/main/Src/24Visitor)
-
-    使用场景： 当需要对一个对象结构中的对象进行很多不同且不相关的操作，而又不想修改这些对象的类时。
-	
-    总结： 在不改变元素类的前提下，增加作用于元素类上的新操作。
+</div>
 

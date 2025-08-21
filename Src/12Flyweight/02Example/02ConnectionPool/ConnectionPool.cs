@@ -35,7 +35,7 @@ namespace _12Flyweight._02Example._02ConnectionPool
         public int ConnectionId { get; }
         public ConnectionConfig Config { get; }  // 共享的配置
         public bool InUse { get; set; }         // 外部状态
-        public string CurrentUser { get; set; }  // 外部状态
+        public string? CurrentUser { get; set; }  // 外部状态
         public DateTime LastUsedTime { get; set; } // 外部状态
         public DateTime CreatedTime { get; }
 

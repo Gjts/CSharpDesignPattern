@@ -14,6 +14,9 @@ namespace _09Compsite._02Example._01WarehouseManagement
             this.type = type;
         }
 
+        // 添加公共属性来访问 name
+        public string Name => name;
+
         public abstract void Add(StorageUnit unit);
         public abstract void Remove(StorageUnit unit);
         public abstract void Display(int depth);
@@ -290,7 +293,7 @@ namespace _09Compsite._02Example._01WarehouseManagement
             
             foreach (var zone in zones)
             {
-                Console.WriteLine($"\n库区: {zone.name}");
+                Console.WriteLine($"\n库区: {zone.Name}");
                 Console.WriteLine($"  SKU种类: {zone.GetTotalSKU()}");
                 Console.WriteLine($"  总数量: {zone.GetTotalQuantity()}");
                 Console.WriteLine($"  总价值: ¥{zone.GetTotalValue():F2}");

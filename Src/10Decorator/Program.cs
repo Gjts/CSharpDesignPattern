@@ -30,7 +30,9 @@ namespace _10Decorator
                 OrderId = "ORD202401001",
                 CustomerId = "CUST123456",
                 TotalAmount = 2580.00m,
-                Items = new List<string> { "iPhone 15", "AirPods Pro" }
+                Items = new List<string> { "iPhone 15", "AirPods Pro" },
+                Status = "待处理",
+                ExtendedInfo = new Dictionary<string, object>()
             };
 
             Console.WriteLine($"\n处理普通订单 - 订单号: {order1.OrderId}");
@@ -56,6 +58,8 @@ namespace _10Decorator
                 CustomerId = "NEW789012",  // 新客户
                 TotalAmount = 15888.00m,    // 高金额
                 Items = new List<string> { "MacBook Pro", "iPad Pro", "Apple Watch" },
+                Status = "待处理",
+                ExtendedInfo = new Dictionary<string, object>(),
                 CreateTime = new DateTime(2024, 1, 1, 2, 30, 0)  // 凌晨订单
             };
 
@@ -80,6 +84,8 @@ namespace _10Decorator
             {
                 Console.WriteLine($"  {info.Key}: {info.Value}");
             }
+
+            Console.ReadLine();
         }
     }
 }

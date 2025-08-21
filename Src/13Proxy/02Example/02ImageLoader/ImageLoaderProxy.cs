@@ -7,14 +7,14 @@ namespace _13Proxy._02Example._02ImageLoader
         string GetInfo();
     }
 
-    // 真实图片类（重量级对象）
+    // 真实图片类
     public class RealImage : IImage
     {
         private string fileName;
-        private byte[] imageData;
+        private byte[]? imageData;
         private int width;
         private int height;
-        private string format;
+        private string? format;
 
         public RealImage(string fileName)
         {
@@ -41,7 +41,7 @@ namespace _13Proxy._02Example._02ImageLoader
             Console.WriteLine($"  ✓ 加载完成");
             Console.WriteLine($"  大小: {size / 1024.0 / 1024.0:F2} MB");
             Console.WriteLine($"  尺寸: {width}x{height}");
-            Console.WriteLine($"  格式: {format.ToUpper()}");
+            Console.WriteLine($"  格式: {format?.ToUpper()}");
         }
 
         public void Display()
@@ -53,14 +53,14 @@ namespace _13Proxy._02Example._02ImageLoader
 
         public string GetInfo()
         {
-            return $"{fileName} ({width}x{height}, {imageData.Length / 1024.0 / 1024.0:F2}MB)";
+            return $"{fileName} ({width}x{height}, {imageData?.Length / 1024.0 / 1024.0:F2}MB)";
         }
     }
 
     // 图片代理类（虚拟代理 - 延迟加载）
     public class ProxyImage : IImage
     {
-        private RealImage realImage;
+        private RealImage? realImage;
         private string fileName;
         private string thumbnailUrl;
         private bool isLoaded = false;
@@ -96,7 +96,10 @@ namespace _13Proxy._02Example._02ImageLoader
             }
             
             // 显示真实图片
-            realImage.Display();
+            if (realImage != null)
+            {
+                realImage.Display();
+            }
         }
 
         public string GetInfo()
@@ -121,7 +124,7 @@ namespace _13Proxy._02Example._02ImageLoader
         private static int maxCacheSize = 5;
         
         private string fileName;
-        private RealImage cachedImage;
+        private RealImage? cachedImage;
 
         public SmartImageProxy(string fileName)
         {
@@ -160,7 +163,11 @@ namespace _13Proxy._02Example._02ImageLoader
                 Console.WriteLine($"[智能代理] 图片已缓存 (缓存数: {imageCache.Count}/{maxCacheSize})");
             }
             
-            cachedImage.Display();
+            // 显示真实图片
+            if (cachedImage != null)
+            {
+                cachedImage.Display();
+            }
         }
 
         public string GetInfo()

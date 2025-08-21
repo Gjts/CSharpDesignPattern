@@ -14,6 +14,9 @@ namespace _09Compsite._02Example._03FileSystem
             this.createdTime = DateTime.Now;
         }
 
+        // 添加公共属性来访问 name
+        public string Name => name;
+
         public abstract void Add(FileSystemComponent component);
         public abstract void Remove(FileSystemComponent component);
         public abstract void Display(int depth);
@@ -95,6 +98,9 @@ namespace _09Compsite._02Example._03FileSystem
         private List<FileSystemComponent> children = new List<FileSystemComponent>();
         private string permissions;
 
+        // 添加公共属性来访问 children
+        public IReadOnlyList<FileSystemComponent> Children => children.AsReadOnly();
+
         public Directory(string name, string owner, string permissions = "rwxr-xr-x") 
             : base(name, owner)
         {
@@ -168,13 +174,13 @@ namespace _09Compsite._02Example._03FileSystem
 
         private void SearchFilesRecursive(FileSystemComponent component, string keyword, List<File> results)
         {
-            if (component is File file && file.name.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+            if (component is File file && file.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase))
             {
                 results.Add(file);
             }
             else if (component is Directory dir)
             {
-                foreach (var child in dir.children)
+                foreach (var child in dir.Children)
                 {
                     SearchFilesRecursive(child, keyword, results);
                 }
@@ -191,13 +197,13 @@ namespace _09Compsite._02Example._03FileSystem
 
         private void GetFilesByExtensionRecursive(FileSystemComponent component, string extension, List<File> results)
         {
-            if (component is File file && file.name.EndsWith($".{extension}", StringComparison.OrdinalIgnoreCase))
+            if (component is File file && file.Name.EndsWith($".{extension}", StringComparison.OrdinalIgnoreCase))
             {
                 results.Add(file);
             }
             else if (component is Directory dir)
             {
-                foreach (var child in dir.children)
+                foreach (var child in dir.Children)
                 {
                     GetFilesByExtensionRecursive(child, extension, results);
                 }
@@ -242,7 +248,7 @@ namespace _09Compsite._02Example._03FileSystem
         {
             if (component is File file)
             {
-                var parts = file.name.Split('.');
+                var parts = file.Name.Split('.');
                 if (parts.Length > 1)
                 {
                     var ext = parts[parts.Length - 1];
@@ -254,7 +260,7 @@ namespace _09Compsite._02Example._03FileSystem
             }
             else if (component is Directory dir)
             {
-                foreach (var child in dir.children)
+                foreach (var child in dir.Children)
                 {
                     CountExtensions(child, extensions);
                 }

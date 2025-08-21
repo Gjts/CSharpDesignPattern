@@ -175,14 +175,14 @@ namespace _11Facade._02Example._02VideoConverter
     // 转换配置
     public class ConversionConfig
     {
-        public string OutputFormat { get; set; }
-        public string Quality { get; set; }
-        public string Resolution { get; set; }
+        public required string OutputFormat { get; set; }
+        public required string Quality { get; set; }
+        public required string Resolution { get; set; }
         public int FrameRate { get; set; }
         public bool IncludeSubtitles { get; set; }
-        public string SubtitleFile { get; set; }
+        public string? SubtitleFile { get; set; }
         public bool ApplyFilters { get; set; }
-        public string Watermark { get; set; }
+        public string? Watermark { get; set; }
     }
 
     // 视频转换外观类

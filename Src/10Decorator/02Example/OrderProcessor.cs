@@ -3,13 +3,13 @@ namespace _10Decorator._02Example
     // 订单类
     public class Order
     {
-        public string OrderId { get; set; }
-        public string CustomerId { get; set; }
+        public required string OrderId { get; set; }
+        public required string CustomerId { get; set; }
         public decimal TotalAmount { get; set; }
-        public List<string> Items { get; set; }
+        public required List<string> Items { get; set; }
         public DateTime CreateTime { get; set; }
-        public string Status { get; set; }
-        public Dictionary<string, object> ExtendedInfo { get; set; }
+        public required string Status { get; set; }
+        public required Dictionary<string, object> ExtendedInfo { get; set; }
 
         public Order()
         {

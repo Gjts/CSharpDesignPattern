@@ -12,10 +12,10 @@ namespace _13Proxy._02Example._03SecurityProxy
     // 用户上下文
     public class UserContext
     {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
+        public required string UserId { get; set; }
+        public required string UserName { get; set; }
         public UserRole Role { get; set; }
-        public List<string> Permissions { get; set; }
+        public required List<string> Permissions { get; set; }
         public DateTime LoginTime { get; set; }
 
         public UserContext()
@@ -38,7 +38,7 @@ namespace _13Proxy._02Example._03SecurityProxy
     {
         private string id;
         private string title;
-        private string content;
+        private string? content;
         private string author;
         private DateTime createdDate;
         private DateTime lastModified;
@@ -56,7 +56,7 @@ namespace _13Proxy._02Example._03SecurityProxy
         public string Read()
         {
             Console.WriteLine($"[文档] 读取文档: {title}");
-            return content;
+            return content ?? string.Empty;
         }
 
         public void Write(string newContent)
@@ -86,7 +86,7 @@ namespace _13Proxy._02Example._03SecurityProxy
     {
         private Document document;
         private UserContext currentUser;
-        private Dictionary<string, List<UserRole>> accessControl;
+        private Dictionary<string, List<UserRole>> accessControl = new();
         private List<string> auditLog;
 
         public SecureDocumentProxy(Document document, UserContext user)
@@ -302,8 +302,8 @@ namespace _13Proxy._02Example._03SecurityProxy
     {
         private Database database;
         private UserContext currentUser;
-        private List<string> sqlWhitelist;
-        private List<string> dangerousKeywords;
+        private List<string> sqlWhitelist = new();
+        private List<string> dangerousKeywords = new();
 
         public SecureDatabaseProxy(Database database, UserContext user)
         {

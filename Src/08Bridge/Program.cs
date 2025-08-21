@@ -45,6 +45,7 @@ namespace _08Bridge
             
             Console.WriteLine("\n" + new string('=', 60));
             Console.WriteLine("桥接模式优势：支付渠道和支付方式可以独立变化和扩展");
+            Console.ReadLine();
         }
     }
 }

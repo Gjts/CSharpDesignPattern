@@ -7,19 +7,19 @@ namespace _13Proxy._02Example._01RemoteService
     public class ApiResponse<T>
     {
         public bool Success { get; set; }
-        public T Data { get; set; }
-        public string Message { get; set; }
+        public required T Data { get; set; }
+        public required string Message { get; set; }
         public DateTime Timestamp { get; set; }
     }
 
     // 商品数据模型
     public class Product
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public required string Id { get; set; }
+        public required string Name { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
-        public string Category { get; set; }
+        public required string Category { get; set; }
         public DateTime LastUpdated { get; set; }
 
         public override string ToString()
@@ -31,27 +31,27 @@ namespace _13Proxy._02Example._01RemoteService
     // 订单数据模型
     public class Order
     {
-        public string OrderId { get; set; }
-        public string CustomerId { get; set; }
-        public List<string> ProductIds { get; set; }
+        public required string OrderId { get; set; }
+        public required string CustomerId { get; set; }
+        public required List<string> ProductIds { get; set; }
         public decimal TotalAmount { get; set; }
-        public string Status { get; set; }
+        public required string Status { get; set; }
         public DateTime CreateTime { get; set; }
     }
 
     // 远程服务接口
     public interface IProductService
     {
-        Product GetProduct(string productId);
+        Product? GetProduct(string productId);
         List<Product> GetProductsByCategory(string category);
         bool UpdateStock(string productId, int quantity);
-        Order CreateOrder(string customerId, List<string> productIds);
+        Order? CreateOrder(string customerId, List<string> productIds);
     }
 
     // 真实的远程服务（模拟）
     public class RemoteProductService : IProductService
     {
-        private Dictionary<string, Product> products;
+        private Dictionary<string, Product> products = new();
         private Random random = new Random();
 
         public RemoteProductService()
@@ -71,7 +71,7 @@ namespace _13Proxy._02Example._01RemoteService
             };
         }
 
-        public Product GetProduct(string productId)
+        public Product? GetProduct(string productId)
         {
             Console.WriteLine($"[远程服务] 查询商品: {productId}");
             
@@ -120,7 +120,7 @@ namespace _13Proxy._02Example._01RemoteService
             return false;
         }
 
-        public Order CreateOrder(string customerId, List<string> productIds)
+        public Order? CreateOrder(string customerId, List<string> productIds)
         {
             Console.WriteLine($"[远程服务] 创建订单，客户: {customerId}");
             
@@ -163,7 +163,7 @@ namespace _13Proxy._02Example._01RemoteService
 
         private class CacheEntry<T>
         {
-            public T Data { get; set; }
+            public required T Data { get; set; }
             public DateTime ExpireTime { get; set; }
             
             public bool IsExpired => DateTime.Now > ExpireTime;
@@ -176,7 +176,7 @@ namespace _13Proxy._02Example._01RemoteService
             categoryCache = new Dictionary<string, CacheEntry<List<Product>>>();
         }
 
-        public Product GetProduct(string productId)
+        public Product? GetProduct(string productId)
         {
             Console.WriteLine($"\n[代理] 获取商品: {productId}");
             
@@ -261,7 +261,7 @@ namespace _13Proxy._02Example._01RemoteService
             return result;
         }
 
-        public Order CreateOrder(string customerId, List<string> productIds)
+        public Order? CreateOrder(string customerId, List<string> productIds)
         {
             Console.WriteLine($"\n[代理] 创建订单");
             
@@ -320,7 +320,7 @@ namespace _13Proxy._02Example._01RemoteService
             innerService = service;
         }
 
-        public Product GetProduct(string productId)
+        public Product? GetProduct(string productId)
         {
             return ExecuteWithRetry(() => innerService.GetProduct(productId), "GetProduct");
         }
@@ -335,12 +335,12 @@ namespace _13Proxy._02Example._01RemoteService
             return ExecuteWithRetry(() => innerService.UpdateStock(productId, quantity), "UpdateStock");
         }
 
-        public Order CreateOrder(string customerId, List<string> productIds)
+        public Order? CreateOrder(string customerId, List<string> productIds)
         {
             return ExecuteWithRetry(() => innerService.CreateOrder(customerId, productIds), "CreateOrder");
         }
 
-        private T ExecuteWithRetry<T>(Func<T> operation, string operationName)
+        private T? ExecuteWithRetry<T>(Func<T?> operation, string operationName) where T : class
         {
             int attempt = 0;
             while (attempt < maxRetries)
@@ -368,7 +368,69 @@ namespace _13Proxy._02Example._01RemoteService
                 }
             }
             
-            return default(T);
+            throw new InvalidOperationException($"操作 {operationName} 在 {maxRetries} 次重试后仍然失败");
+        }
+
+        private bool ExecuteWithRetry(Func<bool> operation, string operationName)
+        {
+            int attempt = 0;
+            while (attempt < maxRetries)
+            {
+                try
+                {
+                    attempt++;
+                    Console.WriteLine($"[重试代理] 执行 {operationName} (尝试 {attempt}/{maxRetries})");
+                    return operation();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[重试代理] 操作失败: {ex.Message}");
+                    
+                    if (attempt < maxRetries)
+                    {
+                        Console.WriteLine($"[重试代理] 等待 {retryDelay.TotalSeconds} 秒后重试...");
+                        System.Threading.Thread.Sleep(retryDelay);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[重试代理] 已达到最大重试次数，操作失败");
+                        throw;
+                    }
+                }
+            }
+            
+            throw new InvalidOperationException($"操作 {operationName} 在 {maxRetries} 次重试后仍然失败");
+        }
+
+        private List<T> ExecuteWithRetry<T>(Func<List<T>> operation, string operationName) where T : class
+        {
+            int attempt = 0;
+            while (attempt < maxRetries)
+            {
+                try
+                {
+                    attempt++;
+                    Console.WriteLine($"[重试代理] 执行 {operationName} (尝试 {attempt}/{maxRetries})");
+                    return operation();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[重试代理] 操作失败: {ex.Message}");
+                    
+                    if (attempt < maxRetries)
+                    {
+                        Console.WriteLine($"[重试代理] 等待 {retryDelay.TotalSeconds} 秒后重试...");
+                        System.Threading.Thread.Sleep(retryDelay);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[重试代理] 已达到最大重试次数，操作失败");
+                        throw;
+                    }
+                }
+            }
+            
+            throw new InvalidOperationException($"操作 {operationName} 在 {maxRetries} 次重试后仍然失败");
         }
     }
 }

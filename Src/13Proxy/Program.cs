@@ -89,21 +89,24 @@ namespace _13Proxy
             { 
                 UserId = "U001", 
                 UserName = "访客", 
-                Role = UserRole.Guest 
+                Role = UserRole.Guest,
+                Permissions = new List<string>()
             };
             
             var normalUser = new UserContext 
             { 
                 UserId = "U002", 
                 UserName = "普通用户", 
-                Role = UserRole.User 
+                Role = UserRole.User,
+                Permissions = new List<string>()
             };
             
             var adminUser = new UserContext 
             { 
                 UserId = "U003", 
                 UserName = "管理员", 
-                Role = UserRole.Admin 
+                Role = UserRole.Admin,
+                Permissions = new List<string>()
             };
             
             // 访客访问文档
@@ -172,6 +175,7 @@ namespace _13Proxy
             Console.WriteLine("3. 保护代理：控制对原始对象的访问权限");
             Console.WriteLine("4. 缓存代理：为开销大的运算结果提供缓存");
             Console.WriteLine(new string('=', 60));
+            Console.ReadLine();
         }
     }
 }

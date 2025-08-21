@@ -10,6 +10,9 @@ namespace _09Compsite._01ImplementationMethod
             this.name = name;
         }
 
+        // 添加公共属性来访问 name
+        public string Name => name;
+
         public abstract void Add(Component component);
         public abstract void Remove(Component component);
         public abstract void Display(int depth);

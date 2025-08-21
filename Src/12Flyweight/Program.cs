@@ -81,6 +81,7 @@ namespace _12Flyweight
             Console.WriteLine("2. 提高性能：避免重复创建相同的对象");
             Console.WriteLine("3. 适用场景：大量相似对象、对象创建成本高、内存受限环境");
             Console.WriteLine(new string('=', 60));
+            Console.ReadLine();
         }
     }
 }

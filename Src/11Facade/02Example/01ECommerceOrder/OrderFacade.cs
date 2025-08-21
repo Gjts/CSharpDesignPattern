@@ -52,8 +52,8 @@ namespace _11Facade._02Example._01ECommerceOrder
         public class PaymentResult
         {
             public bool Success { get; set; }
-            public string TransactionId { get; set; }
-            public string Message { get; set; }
+            public string? TransactionId { get; set; }
+            public required string Message { get; set; }
         }
 
         public PaymentResult ProcessPayment(string orderId, decimal amount, string paymentMethod)
@@ -207,17 +207,17 @@ namespace _11Facade._02Example._01ECommerceOrder
     // 订单信息
     public class OrderInfo
     {
-        public string OrderId { get; set; }
-        public string CustomerId { get; set; }
-        public string CustomerEmail { get; set; }
-        public string CustomerPhone { get; set; }
-        public string ShippingAddress { get; set; }
-        public List<OrderItem> Items { get; set; }
-        public string CouponCode { get; set; }
-        public string PaymentMethod { get; set; }
+        public required string OrderId { get; set; }
+        public required string CustomerId { get; set; }
+        public required string CustomerEmail { get; set; }
+        public required string CustomerPhone { get; set; }
+        public required string ShippingAddress { get; set; }
+        public required List<OrderItem> Items { get; set; }
+        public string? CouponCode { get; set; }
+        public required string PaymentMethod { get; set; }
         public decimal TotalAmount { get; set; }
-        public string Status { get; set; }
-        public string TrackingNumber { get; set; }
+        public required string Status { get; set; }
+        public string? TrackingNumber { get; set; }
 
         public OrderInfo()
         {
@@ -229,8 +229,8 @@ namespace _11Facade._02Example._01ECommerceOrder
 
     public class OrderItem
     {
-        public string SkuId { get; set; }
-        public string ProductName { get; set; }
+        public required string SkuId { get; set; }
+        public required string ProductName { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
     }

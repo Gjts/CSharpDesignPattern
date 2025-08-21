@@ -30,7 +30,7 @@ namespace _07Adapter._01ImplementationMethod._02OutRegister.Services
                     // 根据需求进行处理，例如返回null或抛出异常
                     throw new ArgumentNullException(nameof(input));
                 }
-                return adaptFunction((TInput)input);
+                return adaptFunction((TInput)input) ?? throw new InvalidOperationException("适配函数返回了 null");
             };
         }
 
@@ -46,7 +46,7 @@ namespace _07Adapter._01ImplementationMethod._02OutRegister.Services
             _samestrategies[key] = strategy;
         }
 
-        public IAdapter<TInput, TOutput> CreateAdapter<TInput, TOutput, TParam>(TParam input)
+        public IAdapter<TInput, TOutput>? CreateAdapter<TInput, TOutput, TParam>(TParam input)
         {
             var key = (typeof(TInput), typeof(TOutput), typeof(TParam));
             if (_sameadapters.TryGetValue(key, out var adaptFunction))
@@ -67,11 +67,11 @@ namespace _07Adapter._01ImplementationMethod._02OutRegister.Services
             }
             else
             {
-                throw new NotSupportedException("指定类型不支持适配器");
+                return null; // 返回 null 而不是抛出异常
             }
         }
 
-        public IAdapter<TInput, TOutput> CreateAdapter<TInput, TOutput>()
+        public IAdapter<TInput, TOutput>? CreateAdapter<TInput, TOutput>()
         {
             var key = (typeof(TInput), typeof(TOutput));
             if (_adapters.TryGetValue(key, out var adaptFunction))
@@ -92,11 +92,11 @@ namespace _07Adapter._01ImplementationMethod._02OutRegister.Services
             }
             else
             {
-                throw new NotSupportedException("指定类型不支持适配器");
+                return null; // 返回 null 而不是抛出异常
             }
         }
 
-        public TOutput DetermineResult<TInput, TOutput>(TInput inputValue)
+        public TOutput? DetermineResult<TInput, TOutput>(TInput inputValue)
         {
             if (typeof(TInput) == typeof(decimal) && typeof(TOutput) == typeof(string))
             {
@@ -107,10 +107,10 @@ namespace _07Adapter._01ImplementationMethod._02OutRegister.Services
             }
             else if (typeof(TInput) == typeof(string) && typeof(TOutput) == typeof(int))
             {
-                string inputString = Convert.ToString(inputValue);
+                string? inputString = Convert.ToString(inputValue);
 
                 // 根据字符串内容来返回字符串长度
-                return (TOutput)(object)inputString.Length;
+                return (TOutput)(object)(inputString?.Length ?? 0);
             }
             else
             {

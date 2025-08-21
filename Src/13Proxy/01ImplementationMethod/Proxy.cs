@@ -18,7 +18,7 @@ namespace _13Proxy._01ImplementationMethod
     // 代理类
     public class Proxy : ISubject
     {
-        private RealSubject realSubject;
+        private RealSubject? realSubject;
 
         public void Request()
         {
@@ -73,7 +73,7 @@ namespace _13Proxy._01ImplementationMethod
 
     public class VirtualProxy : IExpensiveObject
     {
-        private ExpensiveObject expensiveObject;
+        private ExpensiveObject? expensiveObject;
 
         public void Process()
         {

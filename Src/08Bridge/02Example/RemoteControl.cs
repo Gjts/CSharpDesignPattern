@@ -30,6 +30,8 @@ namespace _08Bridge._02Example
             Console.WriteLine("电视已关机");
         }
 
+        public bool IsPowerOn() => powerOn;
+
         public void SetChannel(int channel)
         {
             this.channel = channel;
@@ -71,6 +73,8 @@ namespace _08Bridge._02Example
             powerOn = false;
             Console.WriteLine("收音机已关机");
         }
+
+        public bool IsPowerOn() => powerOn;
 
         public void SetChannel(int channel)
         {
