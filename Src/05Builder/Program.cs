@@ -1,5 +1,5 @@
-﻿using _05Builder._02Example.AppConfig;
-using _05Builder._02Example.WMSWarehouse;
+﻿using _Builder._02Example.Report;
+using _Builder._02Example.Computer;
 
 namespace _05Builder
 {
@@ -7,36 +7,55 @@ namespace _05Builder
     {
         static void Main(string[] args)
         {
-            // 1.创建产品类: 用来被构造的复杂对象
-            // 2.创建构造者接口：包含设置产品各个部分的方法，并且包含一个获取最终产品的方法
-            // 3.创建具体构造者类：实现构造者接口，创建具体的构造者。
-            // 4.创建指挥者类：负责管理构造顺序过程。
+            Console.WriteLine("================================ 建造者模式 (Builder Pattern) ================================");
+            Console.WriteLine("适用场景：当需要创建复杂对象，且对象的构建过程需要独立于其表示时");
+            Console.WriteLine("特点：将复杂对象的构建与表示分离，使得同样的构建过程可以创建不同的表示");
+            Console.WriteLine("优点：构建过程可控；易于扩展；隔离复杂对象的创建和使用\n");
 
-            Console.WriteLine("-------------------------------- 应用程序配置对象 ----------------------------------");
-            var director = new AppConfigDirector<AppConfig>();
-            var builder = new ConfigBuilder();
-            var parts = new List<Tuple<string, string>>
-        {
-            new Tuple<string, string>("应用程序配置", "应用程序配置11"),
-            new Tuple<string, string>("应用程序名称", "应用程序名称11"),
-            new Tuple<string, string>("数据库主机", "数据库主机11"),
-            new Tuple<string, string>("数据库名称", "数据库名称11"),
-            new Tuple<string, string>("缓存主机", "缓存主机11"),
-            new Tuple<string, string>("数据库主机", "数据库主机11")
-        };
-            director.Construct(builder, parts);
-            var product = builder.GetResult();
-            product.ShowProduct();
+            Console.WriteLine("-------------------------------- 报表生成系统 ----------------------------------");
+            
+            var reportDirector = new ReportDirector();
+            
+            // 生成PDF报表
+            Console.WriteLine("1. 生成PDF格式报表：");
+            var pdfBuilder = new PDFReportBuilder();
+            reportDirector.SetBuilder(pdfBuilder);
+            reportDirector.ConstructFullReport();
+            var pdfReport = pdfBuilder.GetReport();
+            pdfReport.Show();
+            
+            // 生成Excel报表
+            Console.WriteLine("\n2. 生成Excel格式报表：");
+            var excelBuilder = new ExcelReportBuilder();
+            reportDirector.SetBuilder(excelBuilder);
+            reportDirector.ConstructSummaryReport();
+            var excelReport = excelBuilder.GetReport();
+            excelReport.Show();
 
-            Console.WriteLine("-------------------------------- 创建不同类型的仓储物品 ----------------------------------");
-            var directorWarehouse = new WarehouseItemDirector();
-            var builderWarehouse = new WarehouseItemBuilder();
-            directorWarehouse.Construct(builderWarehouse, "产品1", "苹果20", 100);
-            directorWarehouse.Construct(builderWarehouse, "产品2", "特斯拉 Model X", 1000);
-            var item = builderWarehouse.GetResult();
-            item.DisplayItem();
-
-            Console.ReadKey();
+            Console.WriteLine("\n-------------------------------- 电脑组装系统 ----------------------------------");
+            
+            var computerDirector = new ComputerDirector();
+            
+            // 组装游戏电脑
+            Console.WriteLine("1. 组装游戏电脑：");
+            var gamingBuilder = new GamingComputerBuilder();
+            computerDirector.SetBuilder(gamingBuilder);
+            computerDirector.ConstructComputer();
+            var gamingPC = gamingBuilder.GetComputer();
+            gamingPC.ShowSpecs();
+            
+            // 组装办公电脑
+            Console.WriteLine("\n2. 组装办公电脑：");
+            var officeBuilder = new OfficeComputerBuilder();
+            computerDirector.SetBuilder(officeBuilder);
+            computerDirector.ConstructComputer();
+            var officePC = officeBuilder.GetComputer();
+            officePC.ShowSpecs();
+            
+            Console.WriteLine("\n说明：");
+            Console.WriteLine("- Director控制构建过程，Builder负责具体构建步骤");
+            Console.WriteLine("- 相同的构建过程可以创建不同的产品表示");
+            Console.WriteLine("- 适用于创建复杂对象，特别是对象由多个部分组成的情况");
         }
     }
 }

@@ -1,76 +1,83 @@
-﻿using _06Prototype._01ImplementationMethod;
-using _06Prototype._02Example.Inventory;
-using _06Prototype._02Example.VirtualMachine;
+﻿using _Prototype._02Example.Document;
+using _Prototype._02Example.GameCharacter;
 
 namespace _06Prototype
 {
     internal class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            // 1.创建一个接口或抽象类:定义一个用于克隆对象的方法，通常命名为 Clone 或 DeepCopy
+            Console.WriteLine("================================ 原型模式 (Prototype Pattern) ================================");
+            Console.WriteLine("适用场景：当创建对象成本较大，且需要创建多个相似对象时");
+            Console.WriteLine("特点：通过复制现有实例来创建新对象，而不是通过new操作符");
+            Console.WriteLine("优点：避免重复的初始化代码；隐藏创建对象的复杂性；提高性能\n");
 
-            // 2.创建具体的实现类：实现步骤1中定义的接口或抽象类，提供克隆方法的具体实现。
-
-            // 3.创建原型管理器（可选）：原型管理器用于注册和管理不同类型的原型对象，并在需要时检索和克隆这些对象。
-            Console.WriteLine("-------------------------------- 虚拟机和容器管理 ----------------------------------");
-            var prototype = new VirtualMachine { Name = "Ubuntu", Memory = 4096, OperatingSystem = "Linux" };
-            var manager = new VirtualMachineManager();
-            manager.RegisterVirtualMachine("UbuntuPrototype", prototype);
-
-            var vm1 = manager.CreateVirtualMachine("UbuntuPrototype");
-            Console.WriteLine($"Created VM - Name:{vm1.Name},Memory:{vm1.Memory},OS:{vm1.OperatingSystem}");
-
-            // 修改原型对象，不影响已创建的虚拟机实例
-            prototype.Memory = 8192;
-
-            var vm2 = manager.CreateVirtualMachine("UbuntuPrototype");
-            Console.WriteLine($"Created VM - Name:{vm2.Name},Memory:{vm2.Memory},OS:{vm2.OperatingSystem}");
-
-            Console.WriteLine("-------------------------------- 管理不同类型的库存物品 ----------------------------------");
-
-            // 创建原型实例
-            var originalPrototype = new Prototype<Inventory>();
-
-            // 添加属性
-            originalPrototype["衣服"] = new Inventory("衣服", 100);
-            originalPrototype["裤子"] = new Inventory("裤子", 150);
-            originalPrototype["鞋子"] = new Inventory("鞋子", 650);
-
-            // 执行浅拷贝
-            var shallowCopyPrototype = originalPrototype.ShallowCopy();
-
-            // 执行深拷贝
-            var deepCopyPrototype = originalPrototype.DeepCopy();
-
-            // 演示结果
-            Console.WriteLine("原始值:");
-            foreach (var entry in originalPrototype)
+            Console.WriteLine("-------------------------------- 文档模板系统 ----------------------------------");
+            
+            // 创建原型文档
+            var contractTemplate = new ContractDocument
             {
-                Console.WriteLine($"{entry.Key}: {entry.Value.Name}, {entry.Value.Value}");
-            }
+                Title = "标准合同模板",
+                Content = "合同条款内容...",
+                Author = "法务部",
+                CreateDate = DateTime.Now
+            };
+            
+            // 克隆并修改
+            Console.WriteLine("1. 原始合同模板：");
+            contractTemplate.Display();
+            
+            Console.WriteLine("\n2. 克隆并定制销售合同：");
+            var salesContract = (ContractDocument)contractTemplate.Clone();
+            salesContract.Title = "销售合同 - 客户A";
+            salesContract.AddClause("付款方式：月结30天");
+            salesContract.Display();
+            
+            Console.WriteLine("\n3. 克隆并定制采购合同：");
+            var purchaseContract = (ContractDocument)contractTemplate.Clone();
+            purchaseContract.Title = "采购合同 - 供应商B";
+            purchaseContract.AddClause("交货期限：15个工作日");
+            purchaseContract.Display();
 
-            Console.WriteLine("\n浅拷贝值:");
-            foreach (var entry in shallowCopyPrototype)
+            Console.WriteLine("\n-------------------------------- 游戏角色系统 ----------------------------------");
+            
+            // 创建原型角色
+            var warriorPrototype = new GameCharacter
             {
-                Console.WriteLine($"{entry.Key}: {entry.Value.Name}, {entry.Value.Value}");
-            }
-
-            Console.WriteLine("\n深拷贝值:");
-            foreach (var entry in deepCopyPrototype)
-            {
-                Console.WriteLine($"{entry.Key}: {entry.Value.Name}, {entry.Value.Value}");
-            }
-
-            // 修改原型中的一个属性值
-            Console.WriteLine("\n把衣服值改为:500元");
-            originalPrototype["衣服"].Value = 500;
-
-            // 检查浅拷贝和深拷贝的属性值是否发生变化
-            Console.WriteLine("\n修改之后值:");
-            Console.WriteLine($"Original 衣服: {originalPrototype["衣服"].Value}");
-            Console.WriteLine($"Shallow Copy 衣服: {shallowCopyPrototype["衣服"].Value}");
-            Console.WriteLine($"Deep Copy 衣服: {deepCopyPrototype["衣服"].Value}");
+                Name = "战士模板",
+                Level = 1,
+                Health = 100,
+                Attack = 50,
+                Defense = 30
+            };
+            warriorPrototype.AddSkill("重击");
+            warriorPrototype.AddSkill("防御姿态");
+            
+            Console.WriteLine("1. 原型战士角色：");
+            warriorPrototype.Display();
+            
+            Console.WriteLine("\n2. 克隆精英战士：");
+            var eliteWarrior = warriorPrototype.DeepClone();
+            eliteWarrior.Name = "精英战士";
+            eliteWarrior.Level = 10;
+            eliteWarrior.Health = 500;
+            eliteWarrior.Attack = 150;
+            eliteWarrior.AddSkill("旋风斩");
+            eliteWarrior.Display();
+            
+            Console.WriteLine("\n3. 克隆BOSS战士：");
+            var bossWarrior = warriorPrototype.DeepClone();
+            bossWarrior.Name = "战士BOSS";
+            bossWarrior.Level = 50;
+            bossWarrior.Health = 5000;
+            bossWarrior.Attack = 500;
+            bossWarrior.AddSkill("毁灭打击");
+            bossWarrior.Display();
+            
+            Console.WriteLine("\n说明：");
+            Console.WriteLine("- 通过克隆避免了重复的初始化过程");
+            Console.WriteLine("- 支持深克隆和浅克隆两种方式");
+            Console.WriteLine("- 特别适用于创建成本高但差异小的对象");
         }
     }
 }
