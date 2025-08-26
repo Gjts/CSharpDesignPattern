@@ -24,7 +24,7 @@ namespace _11Facade
             homeTheater.EndMovie();
             
             Console.WriteLine("\n3. 听音乐：");
-            homeTheater.ListenToMusic();
+            homeTheater.ListenToMusic("放松音乐合集");
             
             Console.WriteLine("\n4. 关闭系统：");
             homeTheater.ShutDown();

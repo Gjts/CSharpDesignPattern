@@ -50,6 +50,19 @@ namespace _Flyweight._02Example.Game
         }
     }
 
+    // TreeTypeFactory别名类（为了兼容Program.cs）
+    public class TreeTypeFactory
+    {
+        public static void ShowMemoryUsage()
+        {
+            int treeTypeCount = TreeFactory.GetTreeTypeCount();
+            Console.WriteLine($"\n内存使用统计:");
+            Console.WriteLine($"  树类型对象数: {treeTypeCount}");
+            Console.WriteLine($"  如果不使用享元模式，每棵树都需要存储完整信息");
+            Console.WriteLine($"  使用享元模式后，只需要 {treeTypeCount} 个类型对象 + 位置信息");
+        }
+    }
+
     // 树实例（包含外部状态）
     public class Tree
     {
@@ -82,6 +95,12 @@ namespace _Flyweight._02Example.Game
             TreeType type = TreeFactory.GetTreeType(name, color, texture);
             Tree tree = new Tree(x, y, age, type);
             trees.Add(tree);
+        }
+
+        // 重载方法以支持Program.cs的调用方式
+        public void PlantTree(int x, int y, string name, string color, string texture)
+        {
+            PlantTree(x, y, 1, name, color, texture); // 默认年龄为1
         }
 
         public void Display()

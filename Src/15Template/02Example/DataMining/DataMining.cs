@@ -7,7 +7,7 @@ namespace _15Template._02Example.DataMining
         public void Mine(string path)
         {
             Console.WriteLine($"\n开始数据挖掘流程: {path}");
-            Console.WriteLine("=" * 50);
+            Console.WriteLine(new string('=', 50));
             
             OpenFile(path);
             ExtractData();
@@ -16,7 +16,7 @@ namespace _15Template._02Example.DataMining
             SendReport();
             CloseFile();
             
-            Console.WriteLine("=" * 50);
+            Console.WriteLine(new string('=', 50));
             Console.WriteLine("数据挖掘完成！\n");
         }
 

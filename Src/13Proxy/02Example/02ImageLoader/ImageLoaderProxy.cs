@@ -116,6 +116,12 @@ namespace _Proxy._02Example.ImageLoader
         }
     }
 
+    // ImageProxy别名类（为了兼容Program.cs）
+    public class ImageProxy : ProxyImage
+    {
+        public ImageProxy(string fileName) : base(fileName) { }
+    }
+
     // 智能图片代理（带缓存和预加载）
     public class SmartImageProxy : IImage
     {

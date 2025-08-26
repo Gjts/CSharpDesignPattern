@@ -75,6 +75,26 @@ namespace _Facade._02Example.ECommerce
             notification = new NotificationSystem();
         }
 
+        // 重载方法以支持Program.cs的调用方式
+        public bool PlaceOrder(string userId, string productName, int quantity, string address)
+        {
+            // 模拟产品价格
+            decimal price = productName.Contains("iPhone") ? 8999 : 
+                          productName.Contains("MacBook") ? 15999 : 5999;
+            string email = userId + "@example.com";
+            
+            // 模拟库存检查（MacBook Pro数量大于10时库存不足）
+            if (productName.Contains("MacBook") && quantity > 10)
+            {
+                Console.WriteLine("\n开始处理订单...");
+                Console.WriteLine($"  检查商品 {productName} 库存...");
+                Console.WriteLine("  订单失败: 库存不足");
+                return false;
+            }
+            
+            return PlaceOrder(productName, quantity, price, email, address);
+        }
+
         public bool PlaceOrder(string productId, int quantity, decimal price, string customerEmail, string address)
         {
             Console.WriteLine("\n开始处理订单...");
@@ -123,6 +143,13 @@ namespace _Facade._02Example.ECommerce
             notification.SendEmail(customerEmail, $"订单 {orderId} 已取消，退款将在3-5个工作日内到账");
             
             Console.WriteLine($"订单 {orderId} 取消成功！\n");
+        }
+
+        public string GetOrderStatus(string orderId)
+        {
+            Console.WriteLine($"  查询订单 {orderId} 状态...");
+            // 模拟订单状态
+            return "已发货，预计2-3天送达";
         }
     }
 }

@@ -54,12 +54,27 @@ namespace _Proxy._02Example.DatabaseAccess
         private RealDatabase realDatabase;
         private Dictionary<string, string> cache = new Dictionary<string, string>();
         private string userRole;
+        private string userName;
         private string connectionString;
 
         public DatabaseProxy(string connectionString, string userRole)
         {
             this.connectionString = connectionString;
             this.userRole = userRole;
+        }
+
+        // 无参构造函数（为了兼容Program.cs）
+        public DatabaseProxy()
+        {
+            this.connectionString = "Server=localhost;Database=TestDB";
+        }
+
+        // 设置用户（为了兼容Program.cs）
+        public void SetUser(string userName, string role)
+        {
+            this.userName = userName;
+            this.userRole = role;
+            Console.WriteLine($"  [代理] 设置用户: {userName} (角色: {role})");
         }
 
         public void Connect()
@@ -78,6 +93,8 @@ namespace _Proxy._02Example.DatabaseAccess
 
         public string Query(string sql)
         {
+            Console.WriteLine($"  [代理] 执行查询: {sql}");
+            
             // 权限检查
             if (!CheckAccess(sql))
             {
@@ -104,6 +121,26 @@ namespace _Proxy._02Example.DatabaseAccess
             return result;
         }
 
+        // Execute方法（为了兼容Program.cs）
+        public string Execute(string sql)
+        {
+            Console.WriteLine($"  [代理] 执行命令: {sql}");
+            
+            // 权限检查
+            if (!CheckAccess(sql))
+            {
+                Console.WriteLine($"  [代理] ❌ 权限拒绝: 用户 '{userRole}' 不能执行此操作");
+                return "访问被拒绝: 权限不足";
+            }
+
+            // 确保连接
+            Connect();
+
+            // 执行命令
+            Console.WriteLine($"  [代理] ✅ 命令执行成功");
+            return "命令执行成功";
+        }
+
         public void Disconnect()
         {
             if (realDatabase != null)
@@ -118,18 +155,34 @@ namespace _Proxy._02Example.DatabaseAccess
         {
             Console.WriteLine($"  [代理] 检查用户权限: {userRole}");
             
-            if (userRole == "admin")
+            string sqlUpper = sql.ToUpper();
+            
+            if (userRole == "Admin")
             {
                 return true;
             }
             
-            if (userRole == "user" && (sql.ToUpper().Contains("DELETE") || sql.ToUpper().Contains("DROP")))
+            if (userRole == "User")
             {
-                Console.WriteLine($"  [代理] 权限拒绝: 用户 '{userRole}' 不能执行删除操作");
-                return false;
+                // User不能执行UPDATE、DELETE、DROP操作
+                if (sqlUpper.Contains("UPDATE") || sqlUpper.Contains("DELETE") || sqlUpper.Contains("DROP"))
+                {
+                    return false;
+                }
+                return true;
             }
             
-            return true;
+            if (userRole == "Guest")
+            {
+                // Guest只能执行SELECT查询
+                if (!sqlUpper.Contains("SELECT"))
+                {
+                    return false;
+                }
+                return true;
+            }
+            
+            return false;
         }
     }
 

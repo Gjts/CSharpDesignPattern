@@ -25,7 +25,7 @@ namespace _Flyweight._02Example.TextEditor
     // 享元工厂
     public class CharacterFactory
     {
-        private Dictionary<char, ICharacter> characters = new Dictionary<char, ICharacter>();
+        private static Dictionary<char, ICharacter> characters = new Dictionary<char, ICharacter>();
 
         public ICharacter GetCharacter(char symbol)
         {
@@ -44,6 +44,12 @@ namespace _Flyweight._02Example.TextEditor
         public int GetCharacterCount()
         {
             return characters.Count;
+        }
+
+        public static void ShowPoolStatus()
+        {
+            Console.WriteLine($"\n字符池状态: 共享了 {characters.Count} 个不同字符对象");
+            Console.WriteLine($"字符池内容: {string.Join(", ", characters.Keys.Select(c => $"'{c}'"))}");
         }
     }
 
@@ -67,6 +73,31 @@ namespace _Flyweight._02Example.TextEditor
                 item.character.Display(item.fontSize, item.fontFamily, item.color);
             }
             Console.WriteLine($"\n统计: 文档共 {content.Count} 个字符，使用了 {factory.GetCharacterCount()} 个字符对象");
+        }
+    }
+
+    // 文本编辑器类
+    public class TextEditor
+    {
+        private Document document;
+
+        public TextEditor()
+        {
+            document = new Document();
+        }
+
+        public void TypeText(string text)
+        {
+            foreach (char c in text)
+            {
+                // 为简单起见，使用固定的格式
+                document.AddCharacter(c, 12, "Arial", "Black");
+            }
+        }
+
+        public void Display()
+        {
+            document.Display();
         }
     }
 }
