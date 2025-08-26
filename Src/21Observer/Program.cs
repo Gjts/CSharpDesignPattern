@@ -73,6 +73,7 @@ namespace _21Observer
             Console.WriteLine("- 当服务器指标变化时，所有注册的观察者都会收到通知");
             Console.WriteLine("- 观察者可以动态添加或移除，不影响主题和其他观察者");
             Console.WriteLine("- 每个观察者根据自己的职责处理通知（警报、记录、显示、扩容等）");
+            Console.ReadLine();
         }
     }
 }

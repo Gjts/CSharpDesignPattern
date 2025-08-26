@@ -1,6 +1,4 @@
-﻿using _14Interpreter.Example.WMSRuleEngine;
-
-namespace _14Interpreter
+﻿namespace _14Interpreter
 {
     internal class Program
     {
@@ -54,6 +52,8 @@ namespace _14Interpreter
             Console.WriteLine("\n-------------------------------- 库位优化分析 ----------------------------------");
             var optimizer = new LocationOptimizationExpression();
             optimizer.Interpret(context);
+
+            Console.ReadLine();
         }
 
         private static void InitializeInventory(WMSContext context)

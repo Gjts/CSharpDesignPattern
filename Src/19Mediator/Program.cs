@@ -58,6 +58,7 @@ namespace _19Mediator
             Console.WriteLine("- 各个微服务之间没有直接依赖，都通过协调器进行通信");
             Console.WriteLine("- 协调器负责消息路由、事件分发和服务发现");
             Console.WriteLine("- 新增服务只需注册到协调器，不影响现有服务");
+            Console.ReadLine();
         }
     }
 }

@@ -62,6 +62,7 @@ namespace _12Flyweight
             Console.WriteLine("- 内部状态（字符样式、树木类型）被共享");
             Console.WriteLine("- 外部状态（位置坐标）由客户端维护");
             Console.WriteLine("- 通过共享大幅减少内存使用");
+            Console.ReadLine();
         }
     }
 }

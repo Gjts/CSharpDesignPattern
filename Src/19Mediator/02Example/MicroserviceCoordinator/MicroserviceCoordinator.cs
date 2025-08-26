@@ -13,7 +13,7 @@ namespace _19Mediator.Example.MicroserviceCoordinator
     public interface IMicroservice
     {
         string ServiceName { get; }
-        Task<object> HandleRequestAsync(string operation, object data);
+        Task<object?> HandleRequestAsync(string operation, object data);
         void HandleEvent(string eventName, object eventData);
         void SetCoordinator(IServiceCoordinator coordinator);
     }
@@ -40,6 +40,10 @@ namespace _19Mediator.Example.MicroserviceCoordinator
             if (_services.ContainsKey(serviceName))
             {
                 var result = await _services[serviceName].HandleRequestAsync(operation, data);
+                if (result is null)
+                {
+                    throw new InvalidOperationException($"服务 {serviceName} 返回了空结果");
+                }
                 return (T)result;
             }
 
@@ -96,7 +100,7 @@ namespace _19Mediator.Example.MicroserviceCoordinator
             _coordinator.SubscribeToEvent("OrderCreated", ServiceName);
         }
 
-        public async Task<object> HandleRequestAsync(string operation, object data)
+        public async Task<object?> HandleRequestAsync(string operation, object data)
         {
             Console.WriteLine($"  [用户服务] 处理请求: {operation}");
 
@@ -118,7 +122,7 @@ namespace _19Mediator.Example.MicroserviceCoordinator
                     {
                         return await Task.FromResult(_users[userId]);
                     }
-                    return await Task.FromResult<object>(null);
+                    return await Task.FromResult<object?>(null);
 
                 default:
                     return await Task.FromResult(new { Error = "Unknown operation" });
@@ -139,8 +143,8 @@ namespace _19Mediator.Example.MicroserviceCoordinator
         private class User
         {
             public int Id { get; set; }
-            public string Name { get; set; }
-            public string Email { get; set; }
+            public string Name { get; set; } = string.Empty;
+            public string Email { get; set; } = string.Empty;
         }
     }
 
@@ -158,7 +162,7 @@ namespace _19Mediator.Example.MicroserviceCoordinator
             _coordinator.SubscribeToEvent("PaymentCompleted", ServiceName);
         }
 
-        public async Task<object> HandleRequestAsync(string operation, object data)
+        public async Task<object?> HandleRequestAsync(string operation, object data)
         {
             Console.WriteLine($"  [订单服务] 处理请求: {operation}");
 
@@ -179,6 +183,7 @@ namespace _19Mediator.Example.MicroserviceCoordinator
                     _coordinator?.PublishEvent("OrderCreated", new { OrderId = order.Id, UserId = order.UserId });
                     
                     // 调用支付服务
+                    if (_coordinator is null) throw new InvalidOperationException("Coordinator not set for OrderService");
                     var paymentResult = await _coordinator.SendRequestAsync<dynamic>(
                         "PaymentService", 
                         "ProcessPayment", 
@@ -213,7 +218,7 @@ namespace _19Mediator.Example.MicroserviceCoordinator
             public int Id { get; set; }
             public int UserId { get; set; }
             public decimal Amount { get; set; }
-            public string Status { get; set; }
+            public string Status { get; set; } = string.Empty;
         }
     }
 
@@ -229,7 +234,7 @@ namespace _19Mediator.Example.MicroserviceCoordinator
             _coordinator = coordinator;
         }
 
-        public async Task<object> HandleRequestAsync(string operation, object data)
+        public async Task<object?> HandleRequestAsync(string operation, object data)
         {
             Console.WriteLine($"  [支付服务] 处理请求: {operation}");
 
@@ -274,9 +279,9 @@ namespace _19Mediator.Example.MicroserviceCoordinator
             _coordinator.SubscribeToEvent("PaymentCompleted", ServiceName);
         }
 
-        public async Task<object> HandleRequestAsync(string operation, object data)
+        public async Task<object?> HandleRequestAsync(string operation, object data)
         {
-            return await Task.FromResult(new { Success = true });
+            return await Task.FromResult<object?>(new { Success = true });
         }
 
         public void HandleEvent(string eventName, object eventData)

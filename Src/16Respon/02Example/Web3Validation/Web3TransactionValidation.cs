@@ -247,13 +247,13 @@ namespace _16Respon
 
         protected override bool PerformValidation(Web3Transaction transaction)
         {
-            if (!transaction.Metadata.ContainsKey("tokenId"))
+            if (!transaction.Metadata.TryGetValue("tokenId", out var rawTokenId))
             {
                 return false;
             }
 
-            var tokenId = transaction.Metadata["tokenId"].ToString();
-            if (!_nftOwners.ContainsKey(tokenId))
+            var tokenId = rawTokenId?.ToString();
+            if (string.IsNullOrWhiteSpace(tokenId) || !_nftOwners.ContainsKey(tokenId))
             {
                 return false;
             }

@@ -1,4 +1,4 @@
-﻿using _Proxy._02Example.ImageLoader;
+﻿using ImageLoaderNS = _Proxy._02Example.ImageLoader;
 using _Proxy._02Example.DatabaseAccess;
 
 namespace _13Proxy
@@ -16,9 +16,9 @@ namespace _13Proxy
             
             // 创建图片代理
             Console.WriteLine("1. 创建图片代理（延迟加载）：");
-            IImage image1 = new ImageProxy("photo1.jpg");
-            IImage image2 = new ImageProxy("photo2.jpg");
-            IImage image3 = new ImageProxy("photo3.jpg");
+            ImageLoaderNS.IImage image1 = new ImageLoaderNS.ImageProxy("photo1.jpg");
+            ImageLoaderNS.IImage image2 = new ImageLoaderNS.ImageProxy("photo2.jpg");
+            ImageLoaderNS.IImage image3 = new ImageLoaderNS.ImageProxy("photo3.jpg");
             Console.WriteLine("   图片代理创建完成（未加载实际图片）");
             
             // 显示图片（触发加载）
@@ -58,6 +58,7 @@ namespace _13Proxy
             Console.WriteLine("- 虚拟代理：延迟创建开销大的对象");
             Console.WriteLine("- 保护代理：控制对原始对象的访问权限");
             Console.WriteLine("- 代理和真实对象实现相同接口，客户端无需区分");
+            Console.ReadLine();
         }
     }
 }

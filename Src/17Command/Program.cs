@@ -1,5 +1,3 @@
-﻿using _17Command.Example.WMSOperations;
-
 namespace _17Command
 {
     internal class Program
@@ -60,6 +58,7 @@ namespace _17Command
             Console.WriteLine("- 每个操作都是一个命令对象");
             Console.WriteLine("- 支持撤销、重做、批量操作");
             Console.WriteLine("- 可以将命令放入队列延迟执行");
+            Console.ReadLine();
         }
     }
 }

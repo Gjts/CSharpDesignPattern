@@ -91,7 +91,6 @@ namespace _17Command
     {
         private TextEditor _editor;
         private int _length;
-        private string? _deletedText;
         private string? _previousContent;
 
         public DeleteCommand(TextEditor editor, int length)

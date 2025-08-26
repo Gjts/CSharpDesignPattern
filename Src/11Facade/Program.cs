@@ -24,7 +24,7 @@ namespace _11Facade
             homeTheater.EndMovie();
             
             Console.WriteLine("\n3. 听音乐：");
-            homeTheater.ListenToMusic();
+            homeTheater.ListenToMusic("放松音乐合集");
             
             Console.WriteLine("\n4. 关闭系统：");
             homeTheater.ShutDown();
@@ -50,6 +50,7 @@ namespace _11Facade
             Console.WriteLine("- 外观类封装了复杂的子系统调用");
             Console.WriteLine("- 客户端只需要与外观类交互，不需要了解子系统细节");
             Console.WriteLine("- 子系统类可以独立变化，不影响客户端");
+            Console.ReadLine();
         }
     }
 }

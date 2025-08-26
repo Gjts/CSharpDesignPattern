@@ -255,5 +255,31 @@ namespace _24Visitor
             Console.WriteLine($"绘制三角形: 边长={triangle.A}, {triangle.B}, {triangle.C}");
         }
     }
-}
 
+    // 周长计算访问者
+    public class PerimeterCalculator : IShapeVisitor
+    {
+        public double TotalPerimeter { get; private set; }
+
+        public void Visit(Circle circle)
+        {
+            double perimeter = 2 * Math.PI * circle.Radius;
+            TotalPerimeter += perimeter;
+            Console.WriteLine($"   圆形周长: {perimeter:F2}");
+        }
+
+        public void Visit(Rectangle rectangle)
+        {
+            double perimeter = 2 * (rectangle.Width + rectangle.Height);
+            TotalPerimeter += perimeter;
+            Console.WriteLine($"   矩形周长: {perimeter:F2}");
+        }
+
+        public void Visit(Triangle triangle)
+        {
+            double perimeter = triangle.A + triangle.B + triangle.C;
+            TotalPerimeter += perimeter;
+            Console.WriteLine($"   三角形周长: {perimeter:F2}");
+        }
+    }
+}

@@ -57,6 +57,7 @@ namespace _01Singleton
             Console.WriteLine("- 单例模式保证全局只有一个实例");
             Console.WriteLine("- 提供了多种实现方式，各有优缺点");
             Console.WriteLine("- 常用于资源管理、配置管理等场景");
+            Console.ReadLine();
         }
     }
 }

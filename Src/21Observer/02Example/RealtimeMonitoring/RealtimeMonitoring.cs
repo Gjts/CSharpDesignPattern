@@ -25,6 +25,8 @@ namespace _21Observer.Example.RealtimeMonitoring
         {
             Timestamp = DateTime.Now;
             Metadata = new Dictionary<string, object>();
+            Unit = string.Empty;
+            ServerName = string.Empty;
         }
     }
 

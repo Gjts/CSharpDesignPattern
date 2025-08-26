@@ -1,5 +1,4 @@
-﻿using _15Template.Example.AITraining;
-
+﻿
 namespace _15Template
 {
     internal class Program
@@ -32,6 +31,7 @@ namespace _15Template
             Console.WriteLine("- Train()方法定义了训练流程的模板");
             Console.WriteLine("- 各个具体训练器实现自己的数据加载、预处理、训练等步骤");
             Console.WriteLine("- 训练流程的整体结构保持不变，细节可以变化");
+            Console.ReadLine();
         }
     }
 }

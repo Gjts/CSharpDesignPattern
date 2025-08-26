@@ -55,6 +55,7 @@
             Console.WriteLine("- 每个状态都是一个独立的类，封装了该状态下的行为");
             Console.WriteLine("- 状态转换由状态类自己控制，符合开闭原则");
             Console.WriteLine("- 消除了大量的if-else判断，代码更清晰");
+            Console.ReadLine();
         }
     }
 }

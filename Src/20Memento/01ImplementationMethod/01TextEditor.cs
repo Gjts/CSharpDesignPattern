@@ -52,7 +52,7 @@ namespace _20Memento
             _history.Push(memento);
         }
 
-        public EditorMemento Undo()
+        public EditorMemento? Undo()
         {
             if (_history.Count > 0)
             {
@@ -132,7 +132,7 @@ namespace _20Memento
             Console.WriteLine($"游戏已保存到: {saveName}");
         }
 
-        public GameSave LoadGame(string saveName)
+        public GameSave? LoadGame(string saveName)
         {
             if (_saves.ContainsKey(saveName))
             {

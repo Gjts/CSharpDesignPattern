@@ -1,4 +1,4 @@
-﻿using _AbstractFactory._02Example.UITheme;
+using _AbstractFactory._02Example.UITheme;
 using _AbstractFactory._02Example.DatabaseProvider;
 
 namespace _04AbstractFactory
@@ -66,6 +66,7 @@ namespace _04AbstractFactory
             Console.WriteLine("- 每个工厂创建一整套相关的对象（产品族）");
             Console.WriteLine("- 切换产品族只需更换工厂实例，客户端代码无需修改");
             Console.WriteLine("- 确保同一产品族的对象能够协同工作");
+            Console.ReadLine();
         }
     }
 }

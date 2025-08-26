@@ -1,4 +1,4 @@
-﻿using _20Memento.Example.AIModelCheckpoint;
+using _20Memento.Example.AIModelCheckpoint;
 
 namespace _20Memento
 {
@@ -68,8 +68,15 @@ namespace _20Memento
             Console.WriteLine("--------------------------------");
             Console.WriteLine("恢复到训练中期检查点：");
             var midPoint = checkpointManager.LoadCheckpoint("mid_training");
-            model.RestoreFromCheckpoint(midPoint);
-            model.DisplayState();
+            if (midPoint != null)
+            {
+                model.RestoreFromCheckpoint(midPoint);
+                model.DisplayState();
+            }
+            else
+            {
+                Console.WriteLine("未找到中期检查点，跳过恢复。");
+            }
             
             // 找到并恢复最佳检查点
             Console.WriteLine("\n5. 自动选择最佳检查点：");
@@ -85,6 +92,7 @@ namespace _20Memento
             Console.WriteLine("- 检查点保存了模型的完整状态（权重、超参数、训练进度等）");
             Console.WriteLine("- 支持命名检查点和自动保存机制");
             Console.WriteLine("- 可以随时恢复到任意历史状态，用于调试和优化");
+            Console.ReadLine();
         }
     }
 }

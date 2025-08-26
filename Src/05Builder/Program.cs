@@ -1,4 +1,4 @@
-﻿using _Builder._02Example.Report;
+using _Builder._02Example.Report;
 using _Builder._02Example.Computer;
 
 namespace _05Builder
@@ -56,6 +56,7 @@ namespace _05Builder
             Console.WriteLine("- Director控制构建过程，Builder负责具体构建步骤");
             Console.WriteLine("- 相同的构建过程可以创建不同的产品表示");
             Console.WriteLine("- 适用于创建复杂对象，特别是对象由多个部分组成的情况");
+            Console.ReadLine();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using _Bridge._02Example.Device;
+using _Bridge._02Example.Device;
 using _Bridge._02Example.Notification;
 
 namespace _08Bridge
@@ -62,6 +62,7 @@ namespace _08Bridge
             Console.WriteLine("- 抽象（遥控器/通知类型）和实现（设备/发送方式）可以独立变化");
             Console.WriteLine("- 避免了多维度继承导致的类爆炸问题");
             Console.WriteLine("- 运行时可以动态切换实现");
+            Console.ReadLine();
         }
     }
 }

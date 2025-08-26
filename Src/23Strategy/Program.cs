@@ -56,6 +56,7 @@ namespace _23Strategy
             Console.WriteLine("- 策略类封装了具体的算法实现");
             Console.WriteLine("- 客户端可以在运行时切换策略");
             Console.WriteLine("- 新增策略不需要修改现有代码");
+            Console.ReadLine();
         }
     }
 }

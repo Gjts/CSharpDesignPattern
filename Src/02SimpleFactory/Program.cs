@@ -1,5 +1,7 @@
-﻿using _SimpleFactory._02Example._01Authentication;
+using _SimpleFactory._02Example._01Authentication;
 using _SimpleFactory._02Example._02Warehousing;
+using _SimpleFactory._02Example._03Transport;
+using _SimpleFactory._02Example._04Payment;
 
 namespace _02SimpleFactory
 {
@@ -40,6 +42,7 @@ namespace _02SimpleFactory
             Console.WriteLine("- 工厂类封装了对象创建逻辑，客户端只需传入类型参数");
             Console.WriteLine("- 新增产品类型只需修改工厂类，符合开闭原则");
             Console.WriteLine("- 适用于产品种类相对较少且稳定的场景");
+            Console.ReadLine();
         }
     }
 }

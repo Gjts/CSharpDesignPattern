@@ -82,6 +82,7 @@ namespace _18Iterator
             block3.Transactions.Add(new Transaction("Grace", "Henry", 500, 0.005m));
             block3.Transactions.Add(new Transaction("Ivan", "Julia", 25, 0.001m));
             blockchain.AddBlock(block3);
+            Console.ReadLine();
         }
     }
 }

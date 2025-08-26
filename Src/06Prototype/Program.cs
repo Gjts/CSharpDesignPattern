@@ -1,4 +1,4 @@
-﻿using _Prototype._02Example.Document;
+using _Prototype._02Example.Document;
 using _Prototype._02Example.GameCharacter;
 
 namespace _06Prototype
@@ -78,6 +78,7 @@ namespace _06Prototype
             Console.WriteLine("- 通过克隆避免了重复的初始化过程");
             Console.WriteLine("- 支持深克隆和浅克隆两种方式");
             Console.WriteLine("- 特别适用于创建成本高但差异小的对象");
+            Console.ReadLine();
         }
     }
 }

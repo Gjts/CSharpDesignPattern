@@ -1,4 +1,4 @@
-﻿using _Adapter._02Example.Payment;
+using _07Adapter._02Example.Payment.Business;
 using _Adapter._02Example.DataFormat;
 
 namespace _07Adapter
@@ -56,6 +56,7 @@ namespace _07Adapter
             Console.WriteLine("- 适配器使不兼容的接口能够协同工作");
             Console.WriteLine("- 可以选择对象适配器或类适配器实现方式");
             Console.WriteLine("- 常用于系统集成和第三方库的整合");
+            Console.ReadLine();
         }
     }
 }

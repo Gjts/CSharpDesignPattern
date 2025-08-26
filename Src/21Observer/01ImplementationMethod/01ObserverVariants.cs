@@ -68,7 +68,7 @@ namespace _21Observer._01ImplementationMethod
     public class PullSubject : IPullSubject
     {
         private List<IPullObserver> observers = new();
-        private object state;
+        private object state = new();
         
         public void Attach(IPullObserver observer) => observers.Add(observer);
         public void Detach(IPullObserver observer) => observers.Remove(observer);
@@ -96,18 +96,18 @@ namespace _21Observer._01ImplementationMethod
     // 事件参数
     public class StateChangedEventArgs : EventArgs
     {
-        public string PropertyName { get; set; }
-        public object OldValue { get; set; }
-        public object NewValue { get; set; }
+        public string? PropertyName { get; set; }
+        public object? OldValue { get; set; }
+        public object? NewValue { get; set; }
     }
     
     // 事件驱动主题
     public class EventSubject
     {
         // 声明事件
-        public event EventHandler<StateChangedEventArgs> StateChanged;
+        public event EventHandler<StateChangedEventArgs>? StateChanged;
         
-        private string _state;
+        private string _state = string.Empty;
         public string State
         {
             get => _state;
@@ -184,8 +184,8 @@ namespace _21Observer._01ImplementationMethod
     // 消息类型
     public class Message<T>
     {
-        public string Topic { get; set; }
-        public T Data { get; set; }
+        public string? Topic { get; set; }
+        public T? Data { get; set; }
         public DateTime Timestamp { get; set; } = DateTime.Now;
     }
     
@@ -339,14 +339,14 @@ namespace _21Observer._01ImplementationMethod
     // .NET标准的属性变更通知
     public class ObservableObject : System.ComponentModel.INotifyPropertyChanged
     {
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
         
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName ?? string.Empty));
         }
         
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) 
                 return false;
@@ -360,7 +360,7 @@ namespace _21Observer._01ImplementationMethod
     // 使用示例
     public class Person : ObservableObject
     {
-        private string _name;
+        private string _name = string.Empty;
         private int _age;
         
         public string Name

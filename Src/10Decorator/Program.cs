@@ -16,28 +16,28 @@ namespace _10Decorator
             
             // 基础咖啡
             Console.WriteLine("1. 基础浓缩咖啡：");
-            ICoffee espresso = new Espresso();
+            Beverage espresso = new Espresso();
             Console.WriteLine($"   {espresso.GetDescription()} - ¥{espresso.GetCost():F2}");
             
             // 加牛奶
             Console.WriteLine("\n2. 拿铁（浓缩+牛奶）：");
-            ICoffee latte = new Espresso();
-            latte = new MilkDecorator(latte);
+            Beverage latte = new Espresso();
+            latte = new Milk(latte);
             Console.WriteLine($"   {latte.GetDescription()} - ¥{latte.GetCost():F2}");
             
             // 摩卡（多重装饰）
-            Console.WriteLine("\n3. 摩卡（浓缩+巧克力+牛奶+奶泡）：");
-            ICoffee mocha = new Espresso();
-            mocha = new ChocolateDecorator(mocha);
-            mocha = new MilkDecorator(mocha);
-            mocha = new WhipCreamDecorator(mocha);
+            Console.WriteLine("\n3. 摩卡（浓缩+摩卡+牛奶+奶泡）：");
+            Beverage mocha = new Espresso();
+            mocha = new Mocha(mocha);
+            mocha = new Milk(mocha);
+            mocha = new Whip(mocha);
             Console.WriteLine($"   {mocha.GetDescription()} - ¥{mocha.GetCost():F2}");
             
-            // 美式咖啡
-            Console.WriteLine("\n4. 大杯美式（美式+加大）：");
-            ICoffee americano = new Americano();
-            americano = new SizeDecorator(americano, "大杯");
-            Console.WriteLine($"   {americano.GetDescription()} - ¥{americano.GetCost():F2}");
+            // 混合咖啡
+            Console.WriteLine("\n4. 大杯混合咖啡（混合咖啡+豆浆）：");
+            Beverage houseBlend = new HouseBlend();
+            houseBlend = new Soy(houseBlend);
+            Console.WriteLine($"   {houseBlend.GetDescription()} - ¥{houseBlend.GetCost():F2}");
 
             Console.WriteLine("\n-------------------------------- 数据流处理系统 ----------------------------------");
             
@@ -69,6 +69,7 @@ namespace _10Decorator
             Console.WriteLine("- 装饰器和被装饰对象有相同的接口");
             Console.WriteLine("- 可以用多个装饰器包装对象");
             Console.WriteLine("- 装饰器可以在被装饰对象的行为前后加上自己的行为");
+            Console.ReadLine();
         }
     }
 }

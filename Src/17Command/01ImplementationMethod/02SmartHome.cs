@@ -175,8 +175,6 @@ namespace _17Command
     {
         private AirConditioner _ac;
         private int _temperature;
-        private bool _wasOn;
-        private int _previousTemperature;
 
         public AirConditionerOnCommand(AirConditioner ac, int temperature)
         {

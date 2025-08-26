@@ -68,6 +68,7 @@
             Console.WriteLine("- 访问者模式将操作从数据结构中分离出来");
             Console.WriteLine("- 新增操作只需新增访问者，无需修改元素类");
             Console.WriteLine("- 适合数据结构稳定但操作经常变化的场景");
+            Console.ReadLine();
         }
     }
 }

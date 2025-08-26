@@ -1,4 +1,4 @@
-﻿using _FactoryMethod._02Example.LogAnalysis;
+using _FactoryMethod._02Example.LogAnalysis;
 using _FactoryMethod._02Example.Order;
 
 namespace _03FactoryMethod
@@ -63,6 +63,7 @@ namespace _03FactoryMethod
             Console.WriteLine("- 每个具体工厂负责创建一种产品，职责单一");
             Console.WriteLine("- 新增产品类型只需新增对应的工厂类，无需修改现有代码");
             Console.WriteLine("- 适用于产品种类经常变化，需要灵活扩展的场景");
+            Console.ReadLine();
         }
     }
 }

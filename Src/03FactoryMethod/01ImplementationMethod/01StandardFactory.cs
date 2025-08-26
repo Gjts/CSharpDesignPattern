@@ -111,9 +111,12 @@ namespace _03FactoryMethod._01ImplementationMethod
             var type = Type.GetType(typeName);
             if (type != null && typeof(IProduct).IsAssignableFrom(type))
             {
-                var instance = Activator.CreateInstance(type);
-                // 应用参数...
-                return (IProduct)instance;
+                if (Activator.CreateInstance(type) is IProduct instance)
+                {
+                    // 应用参数...
+                    return instance;
+                }
+                throw new InvalidOperationException($"无法创建类型实例或类型未实现 IProduct: {typeName}");
             }
             throw new ArgumentException($"Invalid type: {typeName}");
         }
@@ -297,7 +300,7 @@ namespace _03FactoryMethod._01ImplementationMethod
     // 辅助类
     public class GenericProduct : IGenericProduct
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
     
     public class AsyncProduct : IAsyncProduct

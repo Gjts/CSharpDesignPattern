@@ -1,6 +1,4 @@
-﻿using _16Respon.Example.Web3Validation;
-
-namespace _16Respon
+﻿namespace _16Respon
 {
     internal class Program
     {
@@ -56,6 +54,7 @@ namespace _16Respon
             Console.WriteLine("- 每个验证器只处理自己负责的验证逻辑");
             Console.WriteLine("- 验证链可以动态配置，灵活组合");
             Console.WriteLine("- 请求沿着链传递，直到被处理或到达链尾");
+            Console.ReadLine();
         }
     }
 }

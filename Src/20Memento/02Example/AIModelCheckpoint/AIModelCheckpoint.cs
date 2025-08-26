@@ -194,7 +194,7 @@ namespace _20Memento.Example.AIModelCheckpoint
             Console.WriteLine($"[检查点管理器] 自动保存 (当前{_autoSaveCheckpoints.Count}个)");
         }
 
-        public ModelCheckpoint LoadCheckpoint(string name)
+        public ModelCheckpoint? LoadCheckpoint(string name)
         {
             if (_checkpoints.ContainsKey(name))
             {
@@ -204,7 +204,7 @@ namespace _20Memento.Example.AIModelCheckpoint
             return null;
         }
 
-        public ModelCheckpoint GetLatestAutoSave()
+        public ModelCheckpoint? GetLatestAutoSave()
         {
             if (_autoSaveCheckpoints.Count > 0)
             {
@@ -228,9 +228,9 @@ namespace _20Memento.Example.AIModelCheckpoint
             Console.WriteLine($"  自动保存: {_autoSaveCheckpoints.Count} 个");
         }
 
-        public ModelCheckpoint FindBestCheckpoint()
+        public ModelCheckpoint? FindBestCheckpoint()
         {
-            ModelCheckpoint best = null;
+            ModelCheckpoint? best = null;
             double bestAccuracy = 0;
 
             foreach (var checkpoint in _checkpoints.Values)
