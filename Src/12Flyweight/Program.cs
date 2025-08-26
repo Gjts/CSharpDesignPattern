@@ -1,5 +1,5 @@
-﻿using _Flyweight._02Example.TextEditor;
-using _Flyweight._02Example.Game;
+using _12Flyweight._02Example._01ProductCache;
+using _12Flyweight._02Example._02ConnectionPool;
 
 namespace _12Flyweight
 {

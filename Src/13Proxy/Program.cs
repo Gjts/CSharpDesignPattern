@@ -1,5 +1,5 @@
-﻿using _Proxy._02Example.ImageLoader;
-using _Proxy._02Example.DatabaseAccess;
+using _13Proxy._02Example._02ImageLoader;
+using _13Proxy._02Example._03SecurityProxy;
 
 namespace _13Proxy
 {

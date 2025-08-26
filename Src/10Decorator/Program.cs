@@ -1,5 +1,4 @@
-﻿using _Decorator._02Example.Coffee;
-using _Decorator._02Example.DataStream;
+using _10Decorator._02Example;
 
 namespace _10Decorator
 {

@@ -1,5 +1,4 @@
-﻿using _Bridge._02Example.Device;
-using _Bridge._02Example.Notification;
+using _08Bridge._02Example;
 
 namespace _08Bridge
 {

@@ -1,5 +1,5 @@
-﻿using _Composite._02Example.FileSystem;
-using _Composite._02Example.Organization;
+using _09Compsite._02Example._02ProductCatalog;
+using _09Compsite._02Example._03FileSystem;
 
 namespace _09Composite
 {

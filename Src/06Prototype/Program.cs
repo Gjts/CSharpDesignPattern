@@ -1,5 +1,5 @@
-﻿using _Prototype._02Example.Document;
-using _Prototype._02Example.GameCharacter;
+using _06Prototype._02Example.VirtualMachine;
+using _06Prototype._02Example.Inventory;
 
 namespace _06Prototype
 {
