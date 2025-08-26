@@ -1,5 +1,5 @@
-﻿using _SimpleFactory._02Example.Logistics;
-using _SimpleFactory._02Example.Payment;
+﻿using _SimpleFactory._02Example._01Authentication;
+using _SimpleFactory._02Example._02Warehousing;
 
 namespace _02SimpleFactory
 {

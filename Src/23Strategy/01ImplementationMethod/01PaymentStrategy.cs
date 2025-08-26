@@ -76,6 +76,11 @@ namespace _23Strategy
             _paymentStrategy = strategy;
         }
 
+        public decimal GetTotal()
+        {
+            return _items.Sum(item => item.price);
+        }
+
         public void Checkout()
         {
             decimal total = _items.Sum(item => item.price);

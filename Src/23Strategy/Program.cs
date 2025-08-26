@@ -16,7 +16,8 @@ namespace _23Strategy
             shoppingCart.AddItem("无线鼠标", 100);
             shoppingCart.AddItem("键盘", 300);
             
-            Console.WriteLine("购物车商品总额: ¥5400\n");
+            var total = shoppingCart.GetTotal();
+            Console.WriteLine($"购物车商品总额: ¥{total:F2}\n");
             
             Console.WriteLine("1. 信用卡支付：");
             shoppingCart.SetPaymentStrategy(new CreditCardPayment("1234-5678-9012-3456"));
