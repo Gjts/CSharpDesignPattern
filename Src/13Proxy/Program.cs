@@ -1,4 +1,4 @@
-﻿using _Proxy._02Example.ImageLoader;
+using ImageLoaderNS = _Proxy._02Example.ImageLoader;
 using _Proxy._02Example.DatabaseAccess;
 
 namespace _13Proxy
@@ -16,9 +16,9 @@ namespace _13Proxy
             
             // 创建图片代理
             Console.WriteLine("1. 创建图片代理（延迟加载）：");
-            IImage image1 = new ImageProxy("photo1.jpg");
-            IImage image2 = new ImageProxy("photo2.jpg");
-            IImage image3 = new ImageProxy("photo3.jpg");
+            ImageLoaderNS.IImage image1 = new ImageLoaderNS.ImageProxy("photo1.jpg");
+            ImageLoaderNS.IImage image2 = new ImageLoaderNS.ImageProxy("photo2.jpg");
+            ImageLoaderNS.IImage image3 = new ImageLoaderNS.ImageProxy("photo3.jpg");
             Console.WriteLine("   图片代理创建完成（未加载实际图片）");
             
             // 显示图片（触发加载）

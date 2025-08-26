@@ -1,4 +1,4 @@
-﻿using _Adapter._02Example.Payment;
+using _07Adapter._02Example.Payment.Business;
 using _Adapter._02Example.DataFormat;
 
 namespace _07Adapter
