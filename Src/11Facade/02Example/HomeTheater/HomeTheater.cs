@@ -115,5 +115,24 @@ namespace _Facade._02Example.HomeTheater
             lights.On();
             Console.WriteLine("家庭影院已关闭！\n");
         }
+
+        public void ListenToMusic(string album)
+        {
+            Console.WriteLine("\n准备播放音乐...");
+            lights.Dim(30);
+            sound.On();
+            sound.SetVolume(15);
+            Console.WriteLine($"播放音乐: {album}\n");
+        }
+
+        public void ShutDown()
+        {
+            Console.WriteLine("\n关闭所有设备...");
+            dvd.Off();
+            sound.Off();
+            projector.Off();
+            lights.On();
+            Console.WriteLine("所有设备已关闭！\n");
+        }
     }
 }

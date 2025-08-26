@@ -60,14 +60,14 @@ namespace _Facade._02Example.ECommerce
     }
 
     // 外观类 - 电商订单外观
-    public class OrderFacade
+    public class ECommerceFacade
     {
         private InventorySystem inventory;
         private PaymentSystem payment;
         private ShippingSystem shipping;
         private NotificationSystem notification;
 
-        public OrderFacade()
+        public ECommerceFacade()
         {
             inventory = new InventorySystem();
             payment = new PaymentSystem();

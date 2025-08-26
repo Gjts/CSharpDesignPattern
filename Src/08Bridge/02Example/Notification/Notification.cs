@@ -64,6 +64,17 @@ namespace _Bridge._02Example.Notification
         {
             messageSender.SendMessage("系统通知", message);
         }
+
+        public void Send(string title, string message)
+        {
+            Notify($"{title}: {message}");
+        }
+
+        public IMessageSender Sender
+        {
+            get { return messageSender; }
+            set { messageSender = value; }
+        }
     }
 
     // 扩展抽象 - 紧急通知
@@ -76,6 +87,17 @@ namespace _Bridge._02Example.Notification
             messageSender.SendMessage("【紧急】", message);
             // 紧急通知发送多次
             Console.WriteLine("    (紧急通知将重复发送3次)");
+        }
+
+        public void Send(string title, string message)
+        {
+            Notify($"{title}: {message}");
+        }
+
+        public IMessageSender Sender
+        {
+            get { return messageSender; }
+            set { messageSender = value; }
         }
     }
 
