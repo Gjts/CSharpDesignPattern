@@ -11,7 +11,7 @@ namespace _14Interpreter.Example.WMSRuleEngine
             InitializeInventory(context);
 
             // 创建规则引擎
-            var ruleEngine = new WMSRuleEngine();
+            var ruleEngine = new _14Interpreter.Example.WMSRuleEngine.WMSRuleEngine();
 
             // 添加补货规则
             ruleEngine.AddRule("电子产品补货", new ReplenishmentRuleExpression(30, "电子产品"));
@@ -30,7 +30,7 @@ namespace _14Interpreter.Example.WMSRuleEngine
             var areaResult = ruleEngine.ExecuteRule("A区低库存", context);
             if (areaResult.Any())
             {
-                Console.WriteLine($"  A区需要补货的商品数: {areaResult.Count}");
+                Console.WriteLine($"  A区需要补货的商品数: {areaResult.Count()}");
             }
 
             // 库位优化分析
