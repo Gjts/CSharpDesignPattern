@@ -1,5 +1,5 @@
-﻿using _10Decorator._01ImplementationMethod;
-using _10Decorator._02Example;
+using _Decorator._02Example.Coffee;
+using _Decorator._02Example.DataStream;
 
 namespace _10Decorator
 {
@@ -7,85 +7,68 @@ namespace _10Decorator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("=== 装饰器模式 Decorator Pattern ===\n");
+            Console.WriteLine("================================ 装饰器模式 (Decorator Pattern) ================================");
+            Console.WriteLine("适用场景：需要动态地给对象添加功能；需要为对象添加的功能可以动态撤销");
+            Console.WriteLine("特点：动态地给对象添加一些额外的职责，比生成子类更加灵活");
+            Console.WriteLine("优点：装饰类和被装饰类可以独立发展；动态扩展功能；可以多次装饰\n");
 
-            // 基础实现
-            Console.WriteLine("1. 基础实现：");
-            ConcreteComponent component = new ConcreteComponent();
+            Console.WriteLine("-------------------------------- 咖啡店订单系统 ----------------------------------");
             
-            ConcreteDecoratorA decoratorA = new ConcreteDecoratorA();
-            ConcreteDecoratorB decoratorB = new ConcreteDecoratorB();
+            // 基础咖啡
+            Console.WriteLine("1. 基础浓缩咖啡：");
+            ICoffee espresso = new Espresso();
+            Console.WriteLine($"   {espresso.GetDescription()} - ¥{espresso.GetCost():F2}");
             
-            decoratorA.SetComponent(component);
-            decoratorB.SetComponent(decoratorA);
+            // 加牛奶
+            Console.WriteLine("\n2. 拿铁（浓缩+牛奶）：");
+            ICoffee latte = new Espresso();
+            latte = new MilkDecorator(latte);
+            Console.WriteLine($"   {latte.GetDescription()} - ¥{latte.GetCost():F2}");
             
-            decoratorB.Operation();
+            // 摩卡（多重装饰）
+            Console.WriteLine("\n3. 摩卡（浓缩+巧克力+牛奶+奶泡）：");
+            ICoffee mocha = new Espresso();
+            mocha = new ChocolateDecorator(mocha);
+            mocha = new MilkDecorator(mocha);
+            mocha = new WhipCreamDecorator(mocha);
+            Console.WriteLine($"   {mocha.GetDescription()} - ¥{mocha.GetCost():F2}");
+            
+            // 美式咖啡
+            Console.WriteLine("\n4. 大杯美式（美式+加大）：");
+            ICoffee americano = new Americano();
+            americano = new SizeDecorator(americano, "大杯");
+            Console.WriteLine($"   {americano.GetDescription()} - ¥{americano.GetCost():F2}");
 
-            // 电商订单处理示例
-            Console.WriteLine("\n2. 电商订单处理示例：");
+            Console.WriteLine("\n-------------------------------- 数据流处理系统 ----------------------------------");
             
-            // 创建测试订单
-            Order order1 = new Order
-            {
-                OrderId = "ORD202401001",
-                CustomerId = "CUST123456",
-                TotalAmount = 2580.00m,
-                Items = new List<string> { "iPhone 15", "AirPods Pro" },
-                Status = "待处理",
-                ExtendedInfo = new Dictionary<string, object>()
-            };
-
-            Console.WriteLine($"\n处理普通订单 - 订单号: {order1.OrderId}");
-            Console.WriteLine("=" + new string('=', 50));
+            // 基础数据流
+            Console.WriteLine("1. 原始数据流：");
+            IDataStream stream = new FileDataStream("data.txt");
+            stream.Write("Hello World!");
+            var data = stream.Read();
+            Console.WriteLine($"   读取: {data}");
             
-            // 构建订单处理链
-            IOrderProcessor processor = new BasicOrderProcessor();
-            processor = new InventoryCheckDecorator(processor);
-            processor = new PaymentValidationDecorator(processor);
-            processor = new CouponProcessorDecorator(processor, 0.15m); // 15%折扣
-            processor = new LogisticsAllocationDecorator(processor);
-            processor = new NotificationDecorator(processor);
+            // 加密数据流
+            Console.WriteLine("\n2. 加密数据流：");
+            stream = new FileDataStream("encrypted.txt");
+            stream = new EncryptionDecorator(stream);
+            stream.Write("Secret Message");
+            data = stream.Read();
+            Console.WriteLine($"   读取: {data}");
             
-            Console.WriteLine($"处理流程: {processor.GetDescription()}\n");
-            Order processedOrder1 = processor.Process(order1);
-            Console.WriteLine($"\n最终状态: {processedOrder1.Status}");
-
-            // 创建高风险订单
-            Console.WriteLine("\n" + new string('-', 60));
-            Order order2 = new Order
-            {
-                OrderId = "ORD202401002",
-                CustomerId = "NEW789012",  // 新客户
-                TotalAmount = 15888.00m,    // 高金额
-                Items = new List<string> { "MacBook Pro", "iPad Pro", "Apple Watch" },
-                Status = "待处理",
-                ExtendedInfo = new Dictionary<string, object>(),
-                CreateTime = new DateTime(2024, 1, 1, 2, 30, 0)  // 凌晨订单
-            };
-
-            Console.WriteLine($"\n处理高风险订单 - 订单号: {order2.OrderId}");
-            Console.WriteLine("=" + new string('=', 50));
+            // 压缩+加密数据流
+            Console.WriteLine("\n3. 压缩加密数据流：");
+            stream = new FileDataStream("compressed.txt");
+            stream = new CompressionDecorator(stream);
+            stream = new EncryptionDecorator(stream);
+            stream.Write("Large Secret Data");
+            data = stream.Read();
+            Console.WriteLine($"   读取: {data}");
             
-            // 构建包含风控的订单处理链
-            IOrderProcessor riskProcessor = new BasicOrderProcessor();
-            riskProcessor = new RiskControlDecorator(riskProcessor);  // 先进行风控检查
-            riskProcessor = new InventoryCheckDecorator(riskProcessor);
-            riskProcessor = new PaymentValidationDecorator(riskProcessor);
-            riskProcessor = new LogisticsAllocationDecorator(riskProcessor);
-            riskProcessor = new NotificationDecorator(riskProcessor);
-            
-            Console.WriteLine($"处理流程: {riskProcessor.GetDescription()}\n");
-            Order processedOrder2 = riskProcessor.Process(order2);
-            Console.WriteLine($"\n最终状态: {processedOrder2.Status}");
-            
-            // 显示订单扩展信息
-            Console.WriteLine("\n订单扩展信息:");
-            foreach (var info in processedOrder2.ExtendedInfo)
-            {
-                Console.WriteLine($"  {info.Key}: {info.Value}");
-            }
-
-            Console.ReadLine();
+            Console.WriteLine("\n说明：");
+            Console.WriteLine("- 装饰器和被装饰对象有相同的接口");
+            Console.WriteLine("- 可以用多个装饰器包装对象");
+            Console.WriteLine("- 装饰器可以在被装饰对象的行为前后加上自己的行为");
         }
     }
 }

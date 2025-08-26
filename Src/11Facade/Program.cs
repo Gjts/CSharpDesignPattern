@@ -1,75 +1,55 @@
+using _Facade._02Example.HomeTheater;
+using _Facade._02Example.ECommerce;
+
 namespace _11Facade
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("=== 外观模式 Facade Pattern ===\n");
+            Console.WriteLine("================================ 外观模式 (Facade Pattern) ================================");
+            Console.WriteLine("适用场景：需要为复杂子系统提供简单接口；需要将子系统与客户端解耦");
+            Console.WriteLine("特点：为子系统中的一组接口提供一个一致的界面，定义了一个高层接口");
+            Console.WriteLine("优点：简化了客户端调用；减少了客户端与子系统的依赖；提高了子系统的独立性\n");
 
-            // 1. 基础实现
-            System.Console.WriteLine("1. 基础实现：");
-            var facade = new _11Facade._01ImplementationMethod.Facade();
-            facade.SimpleOperation1();
-            facade.SimpleOperation2();
-            facade.ComplexOperation();
+            Console.WriteLine("-------------------------------- 家庭影院系统 ----------------------------------");
+            
+            // 创建家庭影院外观
+            var homeTheater = new HomeTheaterFacade();
+            
+            Console.WriteLine("1. 看电影：");
+            homeTheater.WatchMovie("复仇者联盟");
+            
+            Console.WriteLine("\n2. 结束电影：");
+            homeTheater.EndMovie();
+            
+            Console.WriteLine("\n3. 听音乐：");
+            homeTheater.ListenToMusic();
+            
+            Console.WriteLine("\n4. 关闭系统：");
+            homeTheater.ShutDown();
 
-            // 2. 电商订单示例
-            System.Console.WriteLine("\n2. 电商订单示例：");
-            System.Console.WriteLine(new string('-', 60));
-            var orderFacade = new _11Facade._02Example._01ECommerceOrder.ECommerceOrderFacade();
-
-            var order = new _11Facade._02Example._01ECommerceOrder.OrderInfo
-            {
-                OrderId = $"ORD{DateTime.Now:yyyyMMddHHmmss}",
-                CustomerId = "CUST10001",
-                CustomerEmail = "user@example.com",
-                CustomerPhone = "+86-13800000000",
-                ShippingAddress = "深圳市南山区科技园",
-                CouponCode = "SAVE20",
-                PaymentMethod = "Alipay",
-                Status = "待处理",
-                Items = new System.Collections.Generic.List<_11Facade._02Example._01ECommerceOrder.OrderItem>
-                {
-                    new _11Facade._02Example._01ECommerceOrder.OrderItem { SkuId = "SKU001", ProductName = "旗舰手机", Quantity = 1, UnitPrice = 5999m },
-                    new _11Facade._02Example._01ECommerceOrder.OrderItem { SkuId = "SKU003", ProductName = "蓝牙耳机", Quantity = 2, UnitPrice = 199m }
-                }
-            };
-
-            bool orderResult = orderFacade.PlaceOrder(order);
-            System.Console.WriteLine($"\n订单处理结果: {(orderResult ? "成功" : "失败")}, 状态: {order.Status}");
-
-            // 3. 视频转换示例
-            System.Console.WriteLine("\n3. 视频转换示例：");
-            System.Console.WriteLine(new string('-', 60));
-            var converter = new _11Facade._02Example._02VideoConverter.VideoConverterFacade();
-
-            var video = new _11Facade._02Example._02VideoConverter.VideoFile("sample.mov", "MOV", 120, 500_000_000);
-            converter.ConvertToMP4(video, "output/sample.mp4");
-
-            var config = new _11Facade._02Example._02VideoConverter.ConversionConfig
-            {
-                OutputFormat = "MP4",
-                Quality = "高清",
-                Resolution = "1920x1080",
-                FrameRate = 60,
-                IncludeSubtitles = true,
-                SubtitleFile = "captions.srt",
-                ApplyFilters = true,
-                Watermark = "© Demo"
-            };
-            converter.ConvertWithConfig(video, config, "output/sample_hd.mp4");
-
-            // 批量转换示例（可选）
-            var videos = new System.Collections.Generic.List<_11Facade._02Example._02VideoConverter.VideoFile>
-            {
-                new _11Facade._02Example._02VideoConverter.VideoFile("holiday1.mp4", "MP4", 90, 300_000_000),
-                new _11Facade._02Example._02VideoConverter.VideoFile("holiday2.avi", "AVI", 150, 700_000_000)
-            };
-            converter.BatchConvert(videos, "MP4", "output");
-
-            System.Console.WriteLine("\n" + new string('=', 60));
-            System.Console.WriteLine("演示结束");
-            System.Console.ReadLine();
+            Console.WriteLine("\n-------------------------------- 电商下单系统 ----------------------------------");
+            
+            // 创建电商外观
+            var ecommerce = new ECommerceFacade();
+            
+            Console.WriteLine("1. 处理订单 #001：");
+            var success = ecommerce.PlaceOrder("user123", "iPhone 15", 2, "北京市朝阳区");
+            Console.WriteLine($"   订单状态: {(success ? "成功" : "失败")}");
+            
+            Console.WriteLine("\n2. 处理订单 #002（库存不足）：");
+            success = ecommerce.PlaceOrder("user456", "MacBook Pro", 100, "上海市浦东新区");
+            Console.WriteLine($"   订单状态: {(success ? "成功" : "失败")}");
+            
+            Console.WriteLine("\n3. 查询订单状态：");
+            var status = ecommerce.GetOrderStatus("ORD-001");
+            Console.WriteLine($"   订单 ORD-001: {status}");
+            
+            Console.WriteLine("\n说明：");
+            Console.WriteLine("- 外观类封装了复杂的子系统调用");
+            Console.WriteLine("- 客户端只需要与外观类交互，不需要了解子系统细节");
+            Console.WriteLine("- 子系统类可以独立变化，不影响客户端");
         }
     }
 }

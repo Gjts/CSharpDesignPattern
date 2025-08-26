@@ -1,6 +1,5 @@
-﻿using _12Flyweight._01ImplementationMethod;
-using _12Flyweight._02Example._01ProductCache;
-using _12Flyweight._02Example._02ConnectionPool;
+using _Flyweight._02Example.TextEditor;
+using _Flyweight._02Example.Game;
 
 namespace _12Flyweight
 {
@@ -8,80 +7,61 @@ namespace _12Flyweight
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("=== 享元模式 Flyweight Pattern ===\n");
+            Console.WriteLine("================================ 享元模式 (Flyweight Pattern) ================================");
+            Console.WriteLine("适用场景：系统中存在大量相似对象；需要缓冲池的场景");
+            Console.WriteLine("特点：运用共享技术有效地支持大量细粒度的对象");
+            Console.WriteLine("优点：减少内存使用；提高性能；外部状态相对独立\n");
 
-            // 基础实现
-            Console.WriteLine("1. 基础实现：");
-            FlyweightFactory factory = new FlyweightFactory();
+            Console.WriteLine("-------------------------------- 文本编辑器系统 ----------------------------------");
             
-            // 获取享元对象
-            Flyweight fx = factory.GetFlyweight("X");
-            fx.Operation("第一次调用");
+            var editor = new TextEditor();
             
-            Flyweight fy = factory.GetFlyweight("Y");
-            fy.Operation("第二次调用");
+            // 输入文本
+            string text = "Hello World! Hello Flyweight Pattern!";
+            Console.WriteLine($"输入文本: {text}");
             
-            Flyweight fz = factory.GetFlyweight("Z");
-            fz.Operation("第三次调用");
+            // 显示字符和内存使用
+            editor.TypeText(text);
+            editor.Display();
             
-            // 复用已有对象
-            Flyweight fx2 = factory.GetFlyweight("X");
-            fx2.Operation("第四次调用");
-            
-            // 创建非共享对象
-            UnsharedConcreteFlyweight fu = new UnsharedConcreteFlyweight("U");
-            fu.Operation("非共享对象");
-            
-            Console.WriteLine();
-            factory.ListFlyweights();
+            // 显示享元池状态
+            CharacterFactory.ShowPoolStatus();
 
-            // 电商商品缓存示例
-            Console.WriteLine("\n2. 电商商品缓存系统示例：");
-            Console.WriteLine(new string('-', 60));
+            Console.WriteLine("\n-------------------------------- 游戏场景系统 ----------------------------------");
             
-            ECommercePlatform platform = new ECommercePlatform();
+            var forest = new Forest();
             
-            // 加载北京仓的商品
-            platform.LoadProductsForWarehouse("北京仓");
+            // 种植树木
+            Console.WriteLine("种植树木：");
             
-            // 加载上海仓的商品（会复用已缓存的商品基础信息）
-            platform.LoadProductsForWarehouse("上海仓");
+            // 种植橡树
+            for (int i = 0; i < 5; i++)
+            {
+                forest.PlantTree(i * 10, i * 5, "橡树", "绿色", "粗糙");
+            }
             
-            // 显示活跃商品
-            platform.DisplayActiveProducts();
+            // 种植松树
+            for (int i = 0; i < 5; i++)
+            {
+                forest.PlantTree(i * 15 + 50, i * 8, "松树", "深绿", "针状");
+            }
+            
+            // 种植枫树
+            for (int i = 0; i < 5; i++)
+            {
+                forest.PlantTree(i * 12 + 100, i * 6, "枫树", "红色", "光滑");
+            }
+            
+            // 显示森林
+            forest.Display();
             
             // 显示内存使用情况
-            platform.ShowMemoryUsage();
-
-            // 数据库连接池示例
-            Console.WriteLine("\n3. 数据库连接池示例：");
-            Console.WriteLine(new string('-', 60));
+            TreeTypeFactory.ShowMemoryUsage();
             
-            DatabaseManager dbManager = new DatabaseManager();
-            
-            // 单用户操作
-            Console.WriteLine("\n单用户操作演示:");
-            dbManager.ExecuteQuery("admin", "主库", "SELECT * FROM users WHERE id = 1");
-            dbManager.ExecuteQuery("admin", "从库", "SELECT * FROM products LIMIT 10");
-            dbManager.ExecuteQuery("admin", "缓存", "GET user:1:profile");
-            
-            // 多用户并发操作
-            Console.WriteLine("\n多用户并发操作演示:");
-            dbManager.SimulateMultipleUsers();
-            
-            // 显示连接池统计
-            dbManager.ShowStatistics();
-            
-            // 清理过期连接
-            dbManager.Cleanup();
-            
-            Console.WriteLine("\n" + new string('=', 60));
-            Console.WriteLine("享元模式的优势：");
-            Console.WriteLine("1. 减少内存使用：通过共享相似对象减少内存占用");
-            Console.WriteLine("2. 提高性能：避免重复创建相同的对象");
-            Console.WriteLine("3. 适用场景：大量相似对象、对象创建成本高、内存受限环境");
-            Console.WriteLine(new string('=', 60));
-            Console.ReadLine();
+            Console.WriteLine("\n说明：");
+            Console.WriteLine("- 内部状态（字符样式、树木类型）被共享");
+            Console.WriteLine("- 外部状态（位置坐标）由客户端维护");
+            Console.WriteLine("- 通过共享大幅减少内存使用");
         }
     }
 }
