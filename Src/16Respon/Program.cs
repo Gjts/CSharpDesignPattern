@@ -5,107 +5,100 @@ namespace _16Respon
         static void Main(string[] args)
         {
             Console.WriteLine("=== 责任链模式 (Chain of Responsibility Pattern) ===\n");
+            Console.WriteLine("实际案例：Web3交易验证链\n");
 
-            // 示例1：请求审批流程
-            Console.WriteLine("示例1：请求审批流程");
+            // 示例1：ETH转账验证
+            Console.WriteLine("示例1：ETH转账交易验证");
             Console.WriteLine("------------------------");
-            RunApprovalWorkflowExample();
+            RunETHTransactionValidation();
 
-            Console.WriteLine("\n示例2：异常处理链");
+            Console.WriteLine("\n示例2：NFT交易验证");
             Console.WriteLine("------------------------");
-            RunExceptionHandlingExample();
+            RunNFTTransactionValidation();
 
-            Console.WriteLine("\n示例3：HTTP请求处理管道");
+            Console.WriteLine("\n示例3：DeFi协议交互验证");
             Console.WriteLine("------------------------");
-            RunHttpPipelineExample();
+            RunDeFiTransactionValidation();
         }
 
-        static void RunApprovalWorkflowExample()
+        static void RunETHTransactionValidation()
         {
-            // 构建审批链
-            var teamLeader = new TeamLeaderApprover();
-            var manager = new ManagerApprover();
-            var director = new DirectorApprover();
-            var ceo = new CEOApprover();
+            // 构建验证链
+            var addressValidator = new AddressValidator();
+            var balanceValidator = new BalanceValidator();
+            var gasValidator = new GasFeeValidator();
 
-            teamLeader.SetNext(manager);
-            manager.SetNext(director);
-            director.SetNext(ceo);
+            addressValidator.SetNext(balanceValidator);
+            balanceValidator.SetNext(gasValidator);
 
-            // 测试不同金额的请求
-            var requests = new[]
-            {
-                new PurchaseRequest("办公用品", 800, "张三"),
-                new PurchaseRequest("笔记本电脑", 8000, "李四"),
-                new PurchaseRequest("团队建设活动", 25000, "王五"),
-                new PurchaseRequest("服务器设备", 80000, "赵六"),
-                new PurchaseRequest("公司并购", 1000000, "钱七")
-            };
+            // 创建ETH转账交易
+            var tx1 = new Web3Transaction("0xAlice123", "0xBob456", 10, "ETH");
+            Console.WriteLine($"\n交易1: Alice -> Bob, 10 ETH");
+            var result1 = addressValidator.Validate(tx1);
+            Console.WriteLine($"验证结果: {(result1 ? "✅ 成功" : "❌ 失败")}");
 
-            foreach (var request in requests)
-            {
-                Console.WriteLine($"\n处理请求: {request.Purpose} (金额: ¥{request.Amount:N0})");
-                teamLeader.HandleRequest(request);
-            }
+            // 余额不足的交易
+            var tx2 = new Web3Transaction("0xBob456", "0xCharlie789", 100, "ETH");
+            Console.WriteLine($"\n交易2: Bob -> Charlie, 100 ETH");
+            var result2 = addressValidator.Validate(tx2);
+            Console.WriteLine($"验证结果: {(result2 ? "✅ 成功" : "❌ 失败")}");
         }
 
-        static void RunExceptionHandlingExample()
+        static void RunNFTTransactionValidation()
         {
-            // 构建异常处理链
-            var validationHandler = new ValidationExceptionHandler();
-            var authHandler = new AuthenticationExceptionHandler();
-            var dbHandler = new DatabaseExceptionHandler();
-            var generalHandler = new GeneralExceptionHandler();
+            // 构建NFT验证链
+            var addressValidator = new AddressValidator();
+            var nftValidator = new NFTValidator();
+            var gasValidator = new GasFeeValidator();
 
-            validationHandler.SetNext(authHandler);
-            authHandler.SetNext(dbHandler);
-            dbHandler.SetNext(generalHandler);
+            addressValidator.SetNext(nftValidator);
+            nftValidator.SetNext(gasValidator);
 
-            // 模拟不同类型的异常
-            var exceptions = new Exception[]
-            {
-                new ValidationException("邮箱格式不正确"),
-                new AuthenticationException("用户名或密码错误"),
-                new DatabaseException("数据库连接超时"),
-                new FileNotFoundException("配置文件未找到"),
-                new NullReferenceException("对象引用未设置")
-            };
+            // 创建NFT转账交易
+            var nftTx = new Web3Transaction("0xAlice123", "0xBob456", 1, "NFT");
+            nftTx.Metadata["tokenId"] = "BAYC#1234";
+            
+            Console.WriteLine($"\n交易: 转移 BAYC#1234 NFT");
+            var result = addressValidator.Validate(nftTx);
+            Console.WriteLine($"验证结果: {(result ? "✅ 成功" : "❌ 失败")}");
 
-            foreach (var ex in exceptions)
-            {
-                Console.WriteLine($"\n处理异常: {ex.GetType().Name}");
-                validationHandler.Handle(ex);
-            }
+            // 无效的NFT交易
+            var invalidNftTx = new Web3Transaction("0xBob456", "0xAlice123", 1, "NFT");
+            invalidNftTx.Metadata["tokenId"] = "BAYC#1234"; // Bob不拥有这个NFT
+            
+            Console.WriteLine($"\n交易: Bob尝试转移不属于他的NFT");
+            var result2 = addressValidator.Validate(invalidNftTx);
+            Console.WriteLine($"验证结果: {(result2 ? "✅ 成功" : "❌ 失败")}");
         }
 
-        static void RunHttpPipelineExample()
+        static void RunDeFiTransactionValidation()
         {
-            // 构建HTTP请求处理管道
-            var authMiddleware = new AuthenticationMiddleware();
-            var rateLimitMiddleware = new RateLimitMiddleware();
-            var cacheMiddleware = new CacheMiddleware();
-            var loggingMiddleware = new LoggingMiddleware();
+            // 构建DeFi验证链
+            var addressValidator = new AddressValidator();
+            var balanceValidator = new BalanceValidator();
+            var contractValidator = new SmartContractValidator();
+            var defiValidator = new DeFiProtocolValidator();
+            var gasValidator = new GasFeeValidator();
 
-            loggingMiddleware.SetNext(authMiddleware);
-            authMiddleware.SetNext(rateLimitMiddleware);
-            rateLimitMiddleware.SetNext(cacheMiddleware);
+            addressValidator.SetNext(balanceValidator);
+            balanceValidator.SetNext(contractValidator);
+            contractValidator.SetNext(defiValidator);
+            defiValidator.SetNext(gasValidator);
 
-            // 模拟不同的HTTP请求
-            var requests = new[]
-            {
-                new HttpRequest("/api/users", "GET", "valid-token"),
-                new HttpRequest("/api/users", "POST", "invalid-token"),
-                new HttpRequest("/api/products", "GET", "valid-token"),
-                new HttpRequest("/api/orders", "GET", "valid-token"),
-                new HttpRequest("/api/admin", "DELETE", "valid-token")
-            };
+            // Uniswap交易
+            var uniswapTx = new Web3Transaction("0xAlice123", "0xUniswapV3", 50, "ETH");
+            uniswapTx.Metadata["protocol"] = "Uniswap";
+            
+            Console.WriteLine($"\n交易: 在Uniswap上交换50 ETH");
+            var result1 = addressValidator.Validate(uniswapTx);
+            Console.WriteLine($"验证结果: {(result1 ? "✅ 成功" : "❌ 失败")}");
 
-            foreach (var request in requests)
-            {
-                Console.WriteLine($"\n处理HTTP请求: {request.Method} {request.Path}");
-                var response = loggingMiddleware.Handle(request);
-                Console.WriteLine($"响应: {response}");
-            }
+            // 未验证的合约
+            var unknownTx = new Web3Transaction("0xAlice123", "0xUnknownContract", 10, "ETH");
+            
+            Console.WriteLine($"\n交易: 与未知合约交互");
+            var result2 = addressValidator.Validate(unknownTx);
+            Console.WriteLine($"验证结果: {(result2 ? "✅ 成功" : "❌ 失败")}");
         }
     }
 }
