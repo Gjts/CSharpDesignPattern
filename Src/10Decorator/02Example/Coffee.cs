@@ -1,4 +1,4 @@
-namespace _10Decorator._02Example
+namespace _Decorator._02Example.Coffee
 {
     // 饮料抽象类
     public abstract class Beverage

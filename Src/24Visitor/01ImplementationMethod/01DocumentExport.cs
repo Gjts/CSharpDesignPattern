@@ -257,3 +257,30 @@ namespace _24Visitor
     }
 }
 
+// 周长计算访问者
+public class PerimeterCalculator : IShapeVisitor
+{
+    public double TotalPerimeter { get; private set; }
+
+    public void VisitCircle(Circle circle)
+    {
+        double perimeter = 2 * Math.PI * circle.Radius;
+        TotalPerimeter += perimeter;
+        Console.WriteLine($"   圆形周长: {perimeter:F2}");
+    }
+
+    public void VisitRectangle(Rectangle rectangle)
+    {
+        double perimeter = 2 * (rectangle.Width + rectangle.Height);
+        TotalPerimeter += perimeter;
+        Console.WriteLine($"   矩形周长: {perimeter:F2}");
+    }
+
+    public void VisitTriangle(Triangle triangle)
+    {
+        double perimeter = triangle.SideA + triangle.SideB + triangle.SideC;
+        TotalPerimeter += perimeter;
+        Console.WriteLine($"   三角形周长: {perimeter:F2}");
+    }
+}
+

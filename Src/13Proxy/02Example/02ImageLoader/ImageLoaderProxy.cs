@@ -1,4 +1,4 @@
-namespace _13Proxy._02Example._02ImageLoader
+namespace _Proxy._02Example.ImageLoader
 {
     // 图片接口
     public interface IImage
