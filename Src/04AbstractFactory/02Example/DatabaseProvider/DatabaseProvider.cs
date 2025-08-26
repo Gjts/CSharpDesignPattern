@@ -19,12 +19,21 @@ namespace _AbstractFactory._02Example.DatabaseProvider
         void Read();
     }
 
+    // 抽象产品 - 事务
+    public interface ITransaction
+    {
+        void Begin();
+        void Commit();
+        void Rollback();
+    }
+
     // 抽象工厂 - 数据库提供者工厂
     public interface IDatabaseFactory
     {
         IConnection CreateConnection();
         ICommand CreateCommand();
         IDataReader CreateDataReader();
+        ITransaction CreateTransaction();
     }
 
     // 具体产品 - MySQL连接
@@ -59,6 +68,25 @@ namespace _AbstractFactory._02Example.DatabaseProvider
         }
     }
 
+    // 具体产品 - MySQL事务
+    public class MySQLTransaction : ITransaction
+    {
+        public void Begin()
+        {
+            Console.WriteLine("  开始 MySQL 事务");
+        }
+
+        public void Commit()
+        {
+            Console.WriteLine("  提交 MySQL 事务");
+        }
+
+        public void Rollback()
+        {
+            Console.WriteLine("  回滚 MySQL 事务");
+        }
+    }
+
     // 具体工厂 - MySQL数据库工厂
     public class MySQLFactory : IDatabaseFactory
     {
@@ -75,6 +103,11 @@ namespace _AbstractFactory._02Example.DatabaseProvider
         public IDataReader CreateDataReader()
         {
             return new MySQLDataReader();
+        }
+
+        public ITransaction CreateTransaction()
+        {
+            return new MySQLTransaction();
         }
     }
 
@@ -110,6 +143,25 @@ namespace _AbstractFactory._02Example.DatabaseProvider
         }
     }
 
+    // 具体产品 - PostgreSQL事务
+    public class PostgreSQLTransaction : ITransaction
+    {
+        public void Begin()
+        {
+            Console.WriteLine("  开始 PostgreSQL 事务");
+        }
+
+        public void Commit()
+        {
+            Console.WriteLine("  提交 PostgreSQL 事务");
+        }
+
+        public void Rollback()
+        {
+            Console.WriteLine("  回滚 PostgreSQL 事务");
+        }
+    }
+
     // 具体工厂 - PostgreSQL数据库工厂
     public class PostgreSQLFactory : IDatabaseFactory
     {
@@ -127,6 +179,11 @@ namespace _AbstractFactory._02Example.DatabaseProvider
         {
             return new PostgreSQLDataReader();
         }
+
+        public ITransaction CreateTransaction()
+        {
+            return new PostgreSQLTransaction();
+        }
     }
 
     // 数据访问层类
@@ -135,19 +192,23 @@ namespace _AbstractFactory._02Example.DatabaseProvider
         private readonly IConnection _connection;
         private readonly ICommand _command;
         private readonly IDataReader _dataReader;
+        private readonly ITransaction _transaction;
 
         public DataAccessLayer(IDatabaseFactory factory)
         {
             _connection = factory.CreateConnection();
             _command = factory.CreateCommand();
             _dataReader = factory.CreateDataReader();
+            _transaction = factory.CreateTransaction();
         }
 
         public void PerformDatabaseOperations()
         {
             _connection.Connect();
+            _transaction.Begin();
             _command.Execute("SELECT * FROM users");
             _dataReader.Read();
+            _transaction.Commit();
             _connection.Disconnect();
         }
     }

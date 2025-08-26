@@ -1,7 +1,7 @@
 namespace _Prototype._02Example.GameCharacter
 {
     // 游戏角色原型
-    public abstract class GameCharacter : ICloneable
+    public class GameCharacter : ICloneable
     {
         public string Name { get; set; }
         public int Level { get; set; }
@@ -11,13 +11,36 @@ namespace _Prototype._02Example.GameCharacter
         public List<string> Skills { get; set; }
         public Dictionary<string, int> Equipment { get; set; }
 
-        protected GameCharacter()
+        public GameCharacter()
         {
             Skills = new List<string>();
             Equipment = new Dictionary<string, int>();
         }
 
-        public abstract object Clone();
+        public void AddSkill(string skill)
+        {
+            Skills.Add(skill);
+        }
+
+        public object Clone()
+        {
+            var cloned = new GameCharacter
+            {
+                Name = this.Name,
+                Level = this.Level,
+                Health = this.Health,
+                Attack = this.Attack,
+                Defense = this.Defense,
+                Skills = new List<string>(this.Skills),
+                Equipment = new Dictionary<string, int>(this.Equipment)
+            };
+            return cloned;
+        }
+
+        public GameCharacter DeepClone()
+        {
+            return (GameCharacter)Clone();
+        }
 
         public virtual void Display()
         {
@@ -33,7 +56,7 @@ namespace _Prototype._02Example.GameCharacter
     {
         public int Rage { get; set; }
 
-        public override object Clone()
+        public new object Clone()
         {
             var cloned = new Warrior
             {
@@ -61,7 +84,7 @@ namespace _Prototype._02Example.GameCharacter
     {
         public int Mana { get; set; }
 
-        public override object Clone()
+        public new object Clone()
         {
             var cloned = new Mage
             {

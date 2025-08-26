@@ -9,7 +9,7 @@ namespace _Builder._02Example.Report
         public string Footer { get; set; } = "";
         public string Format { get; set; } = "";
 
-        public void Display()
+        public void Show()  // Changed from Display to Show
         {
             Console.WriteLine($"  === {Title} ({Format}格式) ===");
             Console.WriteLine($"  {Header}");
@@ -107,18 +107,32 @@ namespace _Builder._02Example.Report
     {
         private ReportBuilder _builder;
 
-        public ReportDirector(ReportBuilder builder)
+        public ReportDirector()
+        {
+            // Default constructor
+        }
+
+        public void SetBuilder(ReportBuilder builder)
         {
             _builder = builder;
         }
 
-        public void Construct()
+        public void ConstructFullReport()
         {
             _builder.SetTitle();
             _builder.SetHeader();
             _builder.AddSections();
             _builder.SetFooter();
             _builder.SetFormat();
+        }
+
+        public void ConstructSummaryReport()
+        {
+            _builder.SetTitle();
+            _builder.SetHeader();
+            _builder.AddSections();
+            _builder.SetFormat();
+            // Skip footer for summary report
         }
     }
 }

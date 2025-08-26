@@ -151,6 +151,122 @@ namespace _AbstractFactory._02Example.UITheme
         }
     }
 
+    // Add Light Theme classes
+    public class LightButton : IButton
+    {
+        public void Render()
+        {
+            Console.WriteLine("  渲染亮色主题按钮");
+        }
+
+        public void Click()
+        {
+            Console.WriteLine("  亮色按钮被点击");
+        }
+    }
+
+    public class LightTextBox : ITextBox
+    {
+        public void Render()
+        {
+            Console.WriteLine("  渲染亮色主题文本框");
+        }
+
+        public void SetText(string text)
+        {
+            Console.WriteLine($"  亮色文本框输入: {text}");
+        }
+    }
+
+    public class LightCheckBox : ICheckBox
+    {
+        public void Render()
+        {
+            Console.WriteLine("  渲染亮色主题复选框");
+        }
+
+        public void Check()
+        {
+            Console.WriteLine("  亮色复选框被选中");
+        }
+    }
+
+    public class LightThemeFactory : IUIFactory
+    {
+        public IButton CreateButton()
+        {
+            return new LightButton();
+        }
+
+        public ITextBox CreateTextBox()
+        {
+            return new LightTextBox();
+        }
+
+        public ICheckBox CreateCheckBox()
+        {
+            return new LightCheckBox();
+        }
+    }
+
+    // Add Dark Theme classes
+    public class DarkButton : IButton
+    {
+        public void Render()
+        {
+            Console.WriteLine("  渲染暗色主题按钮");
+        }
+
+        public void Click()
+        {
+            Console.WriteLine("  暗色按钮被点击");
+        }
+    }
+
+    public class DarkTextBox : ITextBox
+    {
+        public void Render()
+        {
+            Console.WriteLine("  渲染暗色主题文本框");
+        }
+
+        public void SetText(string text)
+        {
+            Console.WriteLine($"  暗色文本框输入: {text}");
+        }
+    }
+
+    public class DarkCheckBox : ICheckBox
+    {
+        public void Render()
+        {
+            Console.WriteLine("  渲染暗色主题复选框");
+        }
+
+        public void Check()
+        {
+            Console.WriteLine("  暗色复选框被选中");
+        }
+    }
+
+    public class DarkThemeFactory : IUIFactory
+    {
+        public IButton CreateButton()
+        {
+            return new DarkButton();
+        }
+
+        public ITextBox CreateTextBox()
+        {
+            return new DarkTextBox();
+        }
+
+        public ICheckBox CreateCheckBox()
+        {
+            return new DarkCheckBox();
+        }
+    }
+
     // 应用程序类
     public class Application
     {

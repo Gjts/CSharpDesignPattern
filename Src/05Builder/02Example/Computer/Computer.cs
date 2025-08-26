@@ -119,15 +119,26 @@ namespace _Builder._02Example.Computer
     // 指挥者
     public class ComputerDirector
     {
-        public Computer BuildComputer(IComputerBuilder builder)
+        private IComputerBuilder _builder;
+
+        public ComputerDirector()
         {
-            builder.SetCPU();
-            builder.SetRAM();
-            builder.SetStorage();
-            builder.SetGPU();
-            builder.SetOS();
-            builder.SetPrice();
-            return builder.GetComputer();
+            // Default constructor
+        }
+
+        public void SetBuilder(IComputerBuilder builder)
+        {
+            _builder = builder;
+        }
+
+        public void ConstructComputer()
+        {
+            _builder.SetCPU();
+            _builder.SetRAM();
+            _builder.SetStorage();
+            _builder.SetGPU();
+            _builder.SetOS();
+            _builder.SetPrice();
         }
     }
 }
