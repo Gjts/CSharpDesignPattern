@@ -24,7 +24,7 @@ namespace _16Respon
 
         private string GenerateTxHash()
         {
-            return "0x" + Guid.NewGuid().ToString("N").Substring(0, 64);
+            return "0x" + Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");
         }
     }
 

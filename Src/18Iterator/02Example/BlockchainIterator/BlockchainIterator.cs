@@ -21,7 +21,10 @@ namespace _18Iterator.Example.BlockchainIterator
 
         private string CalculateHash()
         {
-            return $"0x{Guid.NewGuid().ToString("N").Substring(0, 64)}";
+            using var sha256 = System.Security.Cryptography.SHA256.Create();
+            var input = Guid.NewGuid().ToString("N");
+            var hashBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
+            return "0x" + BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
         }
     }
 
@@ -37,7 +40,7 @@ namespace _18Iterator.Example.BlockchainIterator
 
         public Transaction(string from, string to, decimal amount, decimal fee)
         {
-            TxId = $"0x{Guid.NewGuid().ToString("N").Substring(0, 40)}";
+            TxId = $"0x{Guid.NewGuid().ToString("N")}{Guid.NewGuid().ToString("N")}".Substring(0, 40);
             From = from;
             To = to;
             Amount = amount;

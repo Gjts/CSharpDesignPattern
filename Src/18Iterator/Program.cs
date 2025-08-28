@@ -60,8 +60,9 @@ namespace _18Iterator
             Console.WriteLine("- 迭代器封装了遍历逻辑，客户端无需了解内部结构");
             Console.WriteLine("- 支持多种遍历方式（正向、反向、筛选）");
             Console.WriteLine("- 可以同时有多个迭代器遍历同一个聚合对象");
+            Console.ReadLine();
         }
-        
+
         private static void AddSampleBlocks(Blockchain blockchain)
         {
             // 区块 1
@@ -82,7 +83,6 @@ namespace _18Iterator
             block3.Transactions.Add(new Transaction("Grace", "Henry", 500, 0.005m));
             block3.Transactions.Add(new Transaction("Ivan", "Julia", 25, 0.001m));
             blockchain.AddBlock(block3);
-            Console.ReadLine();
         }
     }
 }
